@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dear Senior — Class of 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Dancing+Script:wght@500;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+/* =====================================================
+   SENIOR LETTERS — Class of 2026
+   To edit seniors, find the SENIORS array in the
+   <script> at the bottom of this file.
+   ===================================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --parchment: #f5edd6;
+  --parchment-dark: #e8d9b5;
+  --ink: #2c1a0e;
+  --ink-light: #5c3d1e;
+  --ink-faint: #8a6545;
+  --wax: #c0392b;
+  --wax-light: #e74c3c;
+  --gold: #b8860b;
+  --gold-light: #d4a017;
+  --envelope-body: #e8d5a3;
+  --envelope-shadow: #c4a96b;
+  --paper1: #fdf6e3;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--parchment);
+  font-family: 'Lora', Georgia, serif;
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* ===== HERO ===== */
+#collage-container {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  background: var(--parchment-dark);
+  border-bottom: 2px solid var(--envelope-shadow);
+}
+.collage-strip {
+  display: flex;
+  height: 100%;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.collage-page {
+  display: flex;
+  flex-shrink: 0;
+  width: 100vw;
+  height: 100%;
+  gap: 3px;
+}
+.collage-page img {
+  flex: 1;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  min-width: 0;
+}
+.collage-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 7px;
+  z-index: 5;
+}
+.collage-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.collage-dot.active { background: white; }
+
+/* .slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background: var(--parchment-dark);
+  border-bottom: 2px solid var(--envelope-shadow);
+} */
+
+/* .slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  font-size: 88px;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--parchment);
+}
+.slide.active { opacity: 1; }
+.slide-label {
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
+  color: var(--ink-light);
+}
+.slideshow-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 7px;
+  z-index: 5;
+}
+.dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+  cursor: pointer;
+  transition: background 0.3s;
+  border: none;
+} */
+/* .dot.active { background: var(--gold); } */
+
+#hero {
+  text-align: center;
+  padding-bottom: 2rem;
+  background: var(--parchment);
+}
+.site-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  color: var(--ink);
+  margin: 2rem 0 0.4rem;
+  letter-spacing: -0.5px;
+}
+.site-title em { font-style: italic; color: var(--gold); }
+.site-subtitle {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  color: var(--ink-faint);
+  font-size: 1.1rem;
+  margin-bottom: 1.6rem;
+}
+.decorative-line {
+  text-align: center;
+  color: var(--gold);
+  font-size: 1.5rem;
+  letter-spacing: 8px;
+  margin: 0.2rem 0 1.4rem;
+  opacity: 0.6;
+}
+.auth-bar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  font-family: 'Lora', serif;
+  font-size: 0.9rem;
+  padding: 9px 22px;
+  border-radius: 22px;
+  border: 1.5px solid var(--gold);
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+  color: var(--ink);
+}
+.btn:hover { background: var(--gold-light); color: white; border-color: var(--gold-light); }
+.btn-primary { background: var(--gold); color: white; }
+.btn-primary:hover { background: var(--gold-light); }
+.btn-wax { background: var(--wax); color: white; border-color: var(--wax); }
+.btn-wax:hover { background: var(--wax-light); border-color: var(--wax-light); }
+
+/* ===== SEARCH BAR ===== */
+#envelopes-section {
+  padding: 1.5rem 1.5rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.section-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.section-header p {
+  font-style: italic;
+  color: var(--ink-faint);
+  font-size: 0.92rem;
+}
+.search-wrap {
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  position: relative;
+}
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: var(--ink-faint);
+  pointer-events: none;
+}
+#search-input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border: 1.5px solid var(--envelope-shadow);
+  border-radius: 28px;
+  background: white;
+  font-family: 'Lora', serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+#search-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(184,134,11,0.15);
+}
+#search-input::placeholder { color: var(--ink-faint); font-style: italic; }
+.search-count {
+  text-align: center;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+  min-height: 1.2em;
+}
+
+
+
+/* ===== ENVELOPES GRID ===== */
+.envelopes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 32px;
+}
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  font-style: italic;
+  color: var(--ink-faint);
+}
+
+.envelope-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.25s;
+}
+.envelope-wrap:hover { transform: translateY(-8px); }
+.envelope-wrap:hover .envelope-body { box-shadow: 0 14px 36px rgba(44,26,14,0.28); }
+.envelope-wrap:hover .wax-seal { transform: translateX(-50%) scale(1.15); }
+.envelope-wrap.hidden { display: none; }
+
+.envelope-body {
+  width: 190px;
+  height: 270px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 5px 18px rgba(44,26,14,0.18);
+  border: 1px solid var(--envelope-shadow);
+  transition: box-shadow 0.25s;
+  overflow: hidden;
+  background: var(--envelope-body);
+}
+
+/* Baby photo as full face background */
+.env-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 1;
+}
+.env-photo-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  background: var(--envelope-body);
+  z-index: 1;
+}
+
+/* Vintage sepia overlay over photo */
+.env-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(139, 90, 43, 0.18);
+  z-index: 2;
+  mix-blend-mode: multiply;
+}
+
+/* Flap on top */
+.env-flap {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 0;
+  border-left: 95px solid transparent;
+  border-right: 95px solid transparent;
+  border-top: 58px solid rgba(232, 217, 181, 0.82);
+  z-index: 3;
+  pointer-events: none;
+}
+.env-bottom-left {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 0;
+  border-left: 95px solid rgba(232, 217, 181, 0.55);
+  border-top: 62px solid transparent;
+  z-index: 3;
+}
+.env-bottom-right {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 0; height: 0;
+  border-right: 95px solid rgba(232, 217, 181, 0.55);
+  border-top: 62px solid transparent;
+  z-index: 3;
+}
+
+.wax-seal {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px; height: 32px;
+  background: var(--wax);
+  border-radius: 50%;
+  border: 2.5px solid var(--wax-light);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: white;
+  box-shadow: 0 3px 8px rgba(192,57,43,0.45);
+  transition: transform 0.25s;
+}
+
+.env-letter-count {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  background: var(--gold);
+  color: white;
+  font-size: 10px;
+  font-family: 'Lora', serif;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 10px;
+  z-index: 4;
+}
+
+.senior-name {
+  margin-top: 24px;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  color: var(--ink);
+  text-align: center;
+}
+.senior-role {
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  font-style: italic;
+  text-align: center;
+  margin-top: 3px;
+}
+
+/* ===== MODALS ===== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(44, 26, 14, 0.62);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.modal-overlay.open { display: flex; }
+.modal-card {
+  background: var(--paper1);
+  border-radius: 14px;
+  padding: 2rem 2.5rem;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 10px 50px rgba(44,26,14,0.32);
+  position: relative;
+  border: 1px solid var(--parchment-dark);
+}
+.modal-close {
+  position: absolute;
+  top: 14px; right: 16px;
+  background: none; border: none;
+  font-size: 22px; cursor: pointer;
+  color: var(--ink-faint);
+  line-height: 1;
+}
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.55rem;
+  margin-bottom: 0.4rem;
+  color: var(--ink);
+}
+.modal-sub {
+  font-style: italic;
+  color: var(--ink-faint);
+  font-size: 0.9rem;
+  margin-bottom: 1.4rem;
+}
+.form-group { margin-bottom: 1rem; }
+.form-group label {
+  display: block;
+  font-size: 0.84rem;
+  color: var(--ink-light);
+  margin-bottom: 4px;
+}
+.form-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--parchment-dark);
+  border-radius: 8px;
+  background: white;
+  font-family: 'Lora', serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-group input:focus { border-color: var(--gold); }
+
+/* ===== LETTER COMPOSER ===== */
+#composer-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(44, 26, 14, 0.68);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+#composer-overlay.open { display: flex; }
+.composer-card {
+  background: white;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 700px;
+  max-height: 94vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 70px rgba(44,26,14,0.38);
+  position: relative;
+}
+.composer-header {
+  padding: 1.5rem 2rem 1rem;
+  border-bottom: 1px solid var(--parchment-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.composer-to {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  color: var(--ink);
+}
+.composer-to span { font-style: italic; color: var(--gold); }
+
+.paper-picker {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--parchment-dark);
+}
+.picker-label {
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 8px;
+}
+.paper-options { display: flex; gap: 8px; flex-wrap: wrap; }
+.paper-swatch {
+  width: 38px; height: 38px;
+  border-radius: 7px;
+  cursor: pointer;
+  border: 2.5px solid transparent;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.paper-swatch.selected { border-color: var(--gold); transform: scale(1.1); }
+.paper-swatch:hover { transform: scale(1.05); }
+.font-options { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.font-btn {
+  padding: 5px 14px;
+  border: 1.5px solid var(--parchment-dark);
+  border-radius: 18px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  background: white;
+  color: var(--ink);
+  transition: all 0.2s;
+}
+.font-btn.selected { border-color: var(--gold); background: var(--parchment); }
+
+.writing-area {
+  padding: 1.5rem 2rem;
+  min-height: 250px;
+  transition: background 0.3s;
+}
+.letter-textarea {
+  width: 100%;
+  min-height: 210px;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--ink);
+  background: transparent;
+  font-family: 'Lora', serif;
+}
+
+.media-row {
+  padding: 0.8rem 2rem;
+  border-top: 1px solid var(--parchment-dark);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.media-label { font-size: 0.78rem; color: var(--ink-faint); font-style: italic; }
+.media-upload-btn {
+  padding: 5px 14px;
+  border: 1.5px dashed var(--envelope-shadow);
+  border-radius: 18px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background: var(--parchment);
+  color: var(--ink-light);
+  font-family: 'Lora', serif;
+  transition: all 0.2s;
+}
+.media-upload-btn:hover { background: var(--parchment-dark); }
+.media-preview { display: flex; gap: 6px; flex-wrap: wrap; }
+.media-thumb {
+  width: 46px; height: 46px;
+  border-radius: 7px;
+  background: var(--parchment-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  position: relative;
+}
+.media-thumb .remove-media {
+  position: absolute;
+  top: -5px; right: -5px;
+  width: 17px; height: 17px;
+  background: var(--wax);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  color: white;
+  cursor: pointer;
+  border: none;
+  line-height: 1;
+}
+
+.anon-row {
+  padding: 0.8rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid var(--parchment-dark);
+}
+.toggle-label {
+  font-size: 0.88rem;
+  color: var(--ink-light);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.toggle-switch {
+  width: 42px; height: 23px;
+  background: var(--parchment-dark);
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.22s;
+  border: 1px solid var(--envelope-shadow);
+  flex-shrink: 0;
+}
+.toggle-switch.on { background: var(--gold); border-color: var(--gold); }
+.toggle-knob {
+  position: absolute;
+  top: 2.5px; left: 2.5px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: white;
+  transition: left 0.22s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.22);
+}
+.toggle-switch.on .toggle-knob { left: 22px; }
+
+.composer-footer {
+  padding: 1rem 2rem;
+  border-top: 1px solid var(--parchment-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===== SENIOR DASHBOARD ===== */
+#dashboard-section {
+  display: none;
+  padding: 1rem 1.5rem 3rem;
+  max-width: 820px;
+  margin: 0 auto;
+}
+#dashboard-section.visible { display: block; }
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 1.8rem;
+  padding: 1.8rem;
+  background: var(--parchment-dark);
+  border-radius: 14px;
+  border: 1px solid var(--envelope-shadow);
+}
+.dashboard-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--ink);
+  margin-bottom: 5px;
+}
+.dashboard-header p { font-style: italic; color: var(--ink-faint); font-size: 0.9rem; }
+
+.tab-row {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 1.8rem;
+}
+.tab-btn {
+  padding: 9px 22px;
+  border: 1.5px solid var(--envelope-shadow);
+  border-radius: 22px;
+  background: transparent;
+  font-family: 'Lora', serif;
+  font-size: 0.88rem;
+  cursor: pointer;
+  color: var(--ink-light);
+  transition: all 0.2s;
+}
+.tab-btn.active { background: var(--ink); color: var(--parchment); border-color: var(--ink); }
+
+.letters-inbox { display: flex; flex-direction: column; gap: 16px; }
+
+.inbox-letter {
+  background: var(--paper1);
+  border-radius: 11px;
+  border: 1px solid var(--parchment-dark);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.inbox-letter:hover { box-shadow: 0 5px 22px rgba(44,26,14,0.12); }
+.inbox-letter-header {
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--parchment-dark);
+  cursor: pointer;
+}
+.letter-from { font-family: 'Playfair Display', serif; font-size: 1.12rem; color: var(--ink); font-style: italic;}
+.letter-date { font-size: 0.78rem; color: var(--ink-faint); font-style: italic; }
+.inbox-letter-body {
+  padding: 1rem 1.25rem;
+  font-style: italic;
+  color: var(--ink-light);
+  line-height: 1.8;
+  font-size: 0.95rem;
+  display: none;
+}
+.inbox-letter-body.expanded { display: block; }
+.letter-media-row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(90px);
+  background: var(--ink);
+  color: var(--parchment);
+  padding: 11px 26px;
+  border-radius: 26px;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  z-index: 9999;
+  transition: transform 0.4s ease;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+.mailbox-item {
+  margin: 8px 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.mailbox-item:hover { background: #f0f0f0; border-color: #ccc; }
+.mailbox-item.active { background: #1a1a2e; border-color: #1a1a2e; }
+.mailbox-item-from { font-weight: 600; font-size: 0.88rem; color: #1a1a2e; }
+.mailbox-item.active .mailbox-item-from { color: white; }
+.mailbox-item-date { font-size: 0.72rem; color: #aaa; margin-top: 3px; }
+.mailbox-item.active .mailbox-item-date { color: rgba(255,255,255,0.6); }
+
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- SSO SIGN-IN MODAL (shown only when a senior clicks My Letters) -->
+<div id="sso-modal" style="display:none;position:fixed;inset:0;z-index:4000;background:rgba(44,26,14,0.6);align-items:center;justify-content:center;padding:1rem;">
+  <div style="background:var(--paper1);border-radius:16px;padding:2.5rem;max-width:400px;width:100%;box-shadow:0 10px 50px rgba(44,26,14,0.28);border:1px solid var(--parchment-dark);text-align:center;position:relative;">
+    <button onclick="closeSSOModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--ink-faint);">✕</button>
+    <div style="font-size:2.2rem;margin-bottom:1rem;">📬</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--ink);margin-bottom:0.4rem;">Your Letters Await</div>
+    <p style="font-style:italic;color:var(--ink-faint);font-size:0.88rem;margin-bottom:1.8rem;">Sign in with your CMU Google account to open your mailbox. Only seniors can view their letters.</p>
+    <button id="google-signin-btn" onclick="signInWithGoogle()" style="display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:12px 20px;border:1.5px solid #dadce0;border-radius:10px;background:white;cursor:pointer;font-family:'Lora',serif;font-size:0.95rem;color:#3c4043;transition:box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,0.15)'" onmouseout="this.style.boxShadow='none'">
+      <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.7 33.9 29.8 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15 16.1 19.1 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 16.3 2 9.7 7.4 6.3 14.7z"/><path fill="#FBBC05" d="M24 46c5.5 0 10.5-1.9 14.3-5l-6.6-5.4C29.8 37 27 38 24 38c-5.7 0-10.6-3.1-11.8-7.5l-7 5.4C8.5 42.2 15.7 46 24 46z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.8c-.6 2.8-2.3 5.1-4.7 6.6l6.6 5.4C41.6 37.3 45 31.1 45 24c0-1.3-.2-2.7-.5-4z"/></svg>
+      Continue with Google
+    </button>
+    <p style="font-size:0.72rem;color:var(--ink-faint);margin-top:1rem;font-style:italic;">Only @andrew.cmu.edu accounts are accepted</p>
+  </div>
+</div>
+
+<!-- NAV BAR — always visible -->
+<nav style="background:var(--parchment-dark);border-bottom:1px solid var(--envelope-shadow);padding:10px 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:100;">
+  <div style="font-family:'Dancing Script',cursive;font-size:1.2rem;color:var(--ink);">Dear Senior 💌</div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+    <!-- Shown when NOT signed in -->
+    <div id="nav-signed-out" style="display:flex;align-items:center;gap:8px;">
+      <button class="btn btn-primary" style="font-size:0.82rem;padding:7px 16px;" onclick="openSSOModal()">📬 I'm a Senior</button>
+    </div>
+    <!-- Shown when signed in as a senior -->
+    <div id="nav-signed-in" style="display:none;align-items:center;gap:10px;">
+      <span id="nav-senior-badge" style="background:var(--wax);color:white;font-size:0.72rem;padding:3px 10px;border-radius:12px;font-family:'Lora',serif;">Senior</span>
+      <button class="btn btn-primary" style="font-size:0.82rem;padding:7px 16px;" onclick="openMailboxForCurrentUser()">📬 My Letters</button>
+      <span id="nav-user-name" style="font-size:0.8rem;color:var(--ink-faint);font-style:italic;"></span>
+      <button class="btn" style="font-size:0.8rem;padding:6px 14px;" onclick="signOutUser()">Sign out</button>
+    </div>
+    <!-- Shown when signed in but NOT a senior -->
+    <div id="nav-not-senior" style="display:none;align-items:center;gap:10px;">
+      <span id="nav-user-name-2" style="font-size:0.8rem;color:var(--ink-faint);font-style:italic;"></span>
+      <button class="btn" style="font-size:0.8rem;padding:6px 14px;" onclick="signOutUser()">Sign out</button>
+    </div>
+  </div>
+</nav>
+
+<!-- LETTER COMPOSER -->
+<div id="composer-overlay">
+  <div class="composer-card">
+    <div class="composer-header">
+      <div class="composer-to">Writing to <span id="composer-to-name">—</span></div>
+      <button class="modal-close" onclick="closeComposer()">✕</button>
+    </div>
+
+    <div class="paper-picker">
+      <div class="picker-label">Choose your paper</div>
+      <div class="paper-options" id="paper-options">
+        <div class="paper-swatch selected" style="background:#fdf6e3;" onclick="selectPaper(this,'#fdf6e3')" title="Parchment"></div>
+        <div class="paper-swatch" style="background:#f0f4f8;" onclick="selectPaper(this,'#f0f4f8')" title="Blue-grey"></div>
+        <div class="paper-swatch" style="background:#f5f0f8;" onclick="selectPaper(this,'#f5f0f8')" title="Lavender"></div>
+        <div class="paper-swatch" style="background:#f0f8f0;" onclick="selectPaper(this,'#f0f8f0')" title="Mint"></div>
+        <div class="paper-swatch" style="background:#fff8f0;" onclick="selectPaper(this,'#fff8f0')" title="Peach"></div>
+        <div class="paper-swatch" style="background:white;border:1.5px dashed #ccc;" onclick="selectPaper(this,'white')" title="Plain white"></div>
+      </div>
+      <div class="picker-label" style="margin-top:10px;">Choose your font</div>
+      <div class="font-options">
+        <button class="font-btn selected" data-font="'Lora', serif" onclick="selectFont(this)">Classic</button>
+        <button class="font-btn" data-font="'Dancing Script', cursive" onclick="selectFont(this)">Handwritten</button>
+        <button class="font-btn" data-font="'Caveat', cursive" onclick="selectFont(this)">Casual</button>
+        <button class="font-btn" data-font="'Playfair Display', serif" onclick="selectFont(this)">Elegant</button>
+        <button class="font-btn" data-font="Georgia, serif" onclick="selectFont(this)">Traditional</button>
+      </div>
+    </div>
+
+    <div class="writing-area" id="writing-area">
+      <textarea class="letter-textarea" id="letter-text" placeholder="Dear [name],&#10;&#10;I wanted to write to you because..."></textarea>
+    </div>
+
+    <div class="media-row">
+      <span class="media-label">Add a photo:</span>
+      <label class="media-upload-btn" style="cursor:pointer;">
+        📷 Attach photo
+        <input type="file" accept="image/*" style="display:none;" onchange="uploadMedia(this,'photo')"/>
+      </label>
+      <div class="media-preview" id="media-preview"></div>
+    </div>
+
+    <div class="anon-row">
+      <div style="display:flex;flex-direction:column;gap:8px;width:100%;">
+
+        <!-- Layout A: not signed in — default anonymous, opt in to add name -->
+        <div id="anon-layout-guest" style="display:none;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:0.85rem;color:var(--ink-faint);font-style:italic;">Sending anonymously</span>
+            <button id="reveal-name-btn" onclick="toggleGuestName()" style="margin-left:auto;font-family:'Lora',serif;font-size:0.78rem;padding:4px 12px;border:1.5px solid var(--envelope-shadow);border-radius:14px;background:transparent;cursor:pointer;color:var(--ink-light);transition:all 0.2s;" onmouseover="this.style.background='var(--parchment-dark)'" onmouseout="this.style.background='transparent'">+ Add your name</button>
+          </div>
+          <div id="guest-name-row" style="display:none;">
+            <input id="sender-name" type="text" placeholder="Your name"
+              style="width:100%;padding:8px 12px;border:1.5px solid var(--parchment-dark);border-radius:8px;font-family:'Lora',serif;font-size:0.9rem;color:var(--ink);outline:none;background:white;"
+              onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--parchment-dark)'"/>
+          </div>
+        </div>
+
+        <!-- Layout B: signed in — default shows name, opt in to hide -->
+        <div id="anon-layout-user" style="display:none;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:0.85rem;color:var(--ink-light);">Sending as <strong id="signed-in-name-label"></strong></span>
+            <div style="display:flex;align-items:center;gap:7px;margin-left:auto;">
+              <div class="toggle-switch" id="anon-toggle" onclick="toggleSignedInAnon()">
+                <div class="toggle-knob"></div>
+              </div>
+              <label style="font-size:0.78rem;color:var(--ink-faint);font-style:italic;cursor:pointer;" onclick="toggleSignedInAnon()">Send anonymously</label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="composer-footer">
+      <button class="btn" onclick="closeComposer()">Discard</button>
+      <button class="btn btn-wax" onclick="sendLetter()">Seal & Send ✉</button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div id="hero">
+  <div id="collage-container"></div>
+
+  <h1 class="site-title"><em>Dear Senior,</em></h1>
+  <p class="site-subtitle">a love letter to the Class of 2026</p>
+  <div class="decorative-line">— ✦ —</div>
+
+  <div class="auth-bar">
+    <button class="btn btn-primary" onclick="document.getElementById('envelopes-section').scrollIntoView({behavior:'smooth'})">Write a letter ↓</button>
+  </div>
+</div>
+
+<!-- SENIOR DASHBOARD -->
+ <!-- SENIOR DASHBOARD -->
+<div id="dashboard-section">
+  <div class="tab-row">
+    <button class="tab-btn active" onclick="switchTab('inbox',this)">My Letters</button>
+    <button class="tab-btn" onclick="switchTab('write',this)">Write to Others</button>
+  </div>
+  <div id="inbox-view"></div>
+  <div id="write-view" style="display:none;">
+    <p style="text-align:center;font-style:italic;color:var(--ink-faint);margin-bottom:1rem;">Scroll down to find a senior and write to them</p>
+  </div>
+</div>
+
+<!-- OUTLOOK MAILBOX OVERLAY -->
+<div id="mailbox-overlay" style="display:none;position:fixed;inset:0;z-index:3000;background:#f3f2f1;font-family:Arial,sans-serif;">
+  <!-- Top bar -->
+  <div style="background:#1a1a2e;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span style="color:white;font-size:1.1rem;font-weight:600;">💌 My Letters</span>
+      <span id="mailbox-greeting" style="color:rgba(255,255,255,0.6);font-size:0.85rem;"></span>
+    </div>
+    <button onclick="closeMailbox()" style="background:none;border:none;color:white;font-size:1.4rem;cursor:pointer;padding:4px 10px;border-radius:4px;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='none'">✕</button>
+  </div>
+
+  <!-- Main content -->
+  <div style="display:flex;height:calc(100vh - 50px);">
+
+    <!-- Left panel: letter list -->
+    <div style="width:320px;min-width:260px;background:white;border-right:1px solid #ddd;overflow-y:auto;flex-shrink:0;">
+      <div style="padding:14px 16px;border-bottom:1px solid #eee;font-size:0.8rem;color:#666;text-transform:uppercase;letter-spacing:1px;font-weight:600;">Inbox</div>
+      <div id="mailbox-list"></div>
+    </div>
+
+    <!-- Right panel: open letter -->
+    <div id="mailbox-reader" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;">
+      <div style="text-align:center;color:#999;font-style:italic;">
+        <div style="font-size:3rem;margin-bottom:1rem;">💌</div>
+        <div>Select a letter to read it</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- <div id="dashboard-section">
+  <div class="dashboard-header">
+    <h2 id="dashboard-greeting">Your Mailbox</h2>
+    <p id="dashboard-sub">Letters written just for you</p>
+  </div>
+  <div class="tab-row">
+    <button class="tab-btn active" onclick="switchTab('inbox',this)">My Letters</button>
+    <button class="tab-btn" onclick="switchTab('write',this)">Write to Others</button>
+  </div>
+  <div id="inbox-view">
+    <div class="letters-inbox" id="letters-inbox"></div>
+  </div>
+  <div id="write-view" style="display:none;">
+    <p style="text-align:center;font-style:italic;color:var(--ink-faint);margin-bottom:1rem;">Scroll down to find a senior and write to them</p>
+  </div>
+</div> -->
+
+<!-- ENVELOPES -->
+<div id="envelopes-section">
+  <div class="section-header">
+    <h2>The Class of 2026</h2>
+    <p>Click on any envelope to write a letter</p>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" placeholder="Search seniors by name" oninput="filterEnvelopes(this.value)"/>
+  </div>
+  <div class="search-count" id="search-count"></div>
+
+  <div class="envelopes-grid" id="envelopes-grid"></div>
+</div>
+
+<!-- Firebase SDKs -->
+<script type="module">
+import { initializeApp }                       from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider,
+         signInWithPopup, onAuthStateChanged,
+         signOut }                             from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, collection, addDoc,
+         query, where, orderBy, onSnapshot,
+         serverTimestamp} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// ── Firebase config ───────────────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyDuCcloTl8d4Rfd1W9iSrDe_X7EPDVf_tE",
+  authDomain: "senior-letters.firebaseapp.com",
+  projectId: "senior-letters",
+  storageBucket: "senior-letters.firebasestorage.app",
+  messagingSenderId: "822688842497",
+  appId: "1:822688842497:web:21e69e0b918966c683d100",
+};
+
+const ALLOWED_DOMAIN = "@andrew.cmu.edu";
+
+// ── Seniors list ──────────────────────────────────────
+const SENIORS = [
+  { name: "Hend Aldosari", email: "haldosar@andrew.cmu.edu", photo_url: "/photos/1.png", role: "" },
+  { name: "Imron Barotov", email: "ibarotov@andrew.cmu.edu", photo_url: "/photos/2.png", role: "" },
+  { name: "Mohammad Khan", email: "mhk2@andrew.cmu.edu", photo_url: "/photos/3.png", role: "" },
+  { name: "Mariam Abdelatef", email: "mabdelat@andrew.cmu.edu", photo_url: "/photos/4.png", role: "" },
+  { name: "Cynthia Akaliza", email: "cakaliza@andrew.cmu.edu", photo_url: "/photos/5.png", role: "" },
+  { name: "Abdulla Al Hemaidi", email: "aahemaid@andrew.cmu.edu", photo_url: "/photos/6.png", role: "" },
+  { name: "Al Jazi Al Khulaifi", email: "akhulaif@andrew.cmu.edu", photo_url: "/photos/7.png", role: "" },
+  { name: "Abdulaziz Al Mana", email: "anmana@andrew.cmu.edu", photo_url: "/photos/8.png", role: "" },
+  { name: "Dema Al Shirawi", email: "dshirawi@andrew.cmu.edu", photo_url: "/photos/9.png", role: "" },
+  { name: "Maryam Al Suwaidi", email: "malsuwai@andrew.cmu.edu", photo_url: "/photos/10.png", role: "" },
+  { name: "Haya Al Anssari", email: "hanssari@andrew.cmu.edu", photo_url: "/photos/12.png", role: "" },
+  { name: "Aljazi Al Harami", email: "aharami@andrew.cmu.edu", photo_url: "/photos/13.png", role: "" },
+  { name: "Nawaf Al Khalifa", email: "nmkhalif@andrew.cmu.edu", photo_url: "/photos/14.png", role: "" },
+  { name: "Ahmad Al Sulaiti", email: "ahmadsul@andrew.cmu.edu", photo_url: "/photos/15.png", role: "" },
+  { name: "Nada Alaeddine", email: "nnalaedd@andrew.cmu.edu", photo_url: "/photos/16.png", role: "" },
+  { name: "Gabriel Almeida", email: "gsouza@andrew.cmu.edu", photo_url: "/photos/17.png", role: "" },
+  { name: "Fatima Almuftah", email: "falmufta@andrew.cmu.edu", photo_url: "/photos/18.png", role: "" },
+  { name: "Shaikha Almutawa", email: "salmutaw@andrew.cmu.edu", photo_url: "/photos/19.png", role: "" },
+  { name: "Saif Alnamla", email: "salnamla@andrew.cmu.edu", photo_url: "/photos/20.png", role: "" },
+  { name: "Sultan Balgabay", email: "sbalgaba@andrew.cmu.edu", photo_url: "/photos/21.png", role: "" },
+  { name: "Sheentaro Borras", email: "ssborras@andrew.cmu.edu", photo_url: "/photos/22.png", role: "" },
+  { name: "Julia Nicole Castillo", email: "julianic@andrew.cmu.edu", photo_url: "/photos/23.png", role: "" },
+  { name: "Phat Diep", email: "phdiep@andrew.cmu.edu", photo_url: "/photos/24.png", role: "" },
+  { name: "Zaid Hijazi", email: "zhijazi@andrew.cmu.edu", photo_url: "/photos/25.png", role: "" },
+  { name: "Abduraim Jamshodov", email: "ajamshod@andrew.cmu.edu", photo_url: "/photos/26.png", role: "" },
+  { name: "Ulpan Kaiyrbayeva", email: "ukaiyrba@andrew.cmu.edu", photo_url: "/photos/27.png", role: "" },
+  { name: "Omar Khalaf", email: "okhalaf@andrew.cmu.edu", photo_url: "/photos/28.png", role: "" },
+  { name: "Miras Kurmangali", email: "mkurmang@andrew.cmu.edu", photo_url: "/photos/29.png", role: "" },
+  { name: "Rediet Lemma", email: "rlemma@andrew.cmu.edu", photo_url: "/photos/30.png", role: "" },
+  { name: "Zeina Mahdi Mahmoud", email: "zmahmoud@andrew.cmu.edu", photo_url: "/photos/31.png", role: "" },
+  { name: "Jade Mathias", email: "jmathias@andrew.cmu.edu", photo_url: "/photos/32.png", role: "" },
+  { name: "Hala Naim", email: "hnaim@andrew.cmu.edu", photo_url: "/photos/33.png", role: "" },
+  { name: "Jennie Nguyen", email: "qdn@andrew.cmu.edu", photo_url: "/photos/34.png", role: "" },
+  { name: "Azizjon Samandarov", email: "asamanda@andrew.cmu.edu", photo_url: "/photos/35.png", role: "" },
+  { name: "Akniyet Serikbay", email: "aserikba@andrew.cmu.edu", photo_url: "/photos/36.png", role: "" },
+  { name: "Mahnoor Sethi", email: "mahnoors@andrew.cmu.edu", photo_url: "/photos/37.png", role: "" },
+  { name: "Mayowa Abayomi", email: "mabayomi@andrew.cmu.edu", photo_url: "/photos/38.png", role: "" },
+  { name: "Khalid Al Abdulla", email: "kabdulla@andrew.cmu.edu", photo_url: "/photos/39.png", role: "" },
+  { name: "Saja Al Balushi", email: "sbalushi@andrew.cmu.edu", photo_url: "/photos/40.png", role: "" },
+  { name: "Salma Al Hardan", email: "shardan@andrew.cmu.edu", photo_url: "/photos/41.png", role: "" },
+  { name: "Noora Al Kuwari", email: "noorakuw@andrew.cmu.edu", photo_url: "/photos/42.png", role: "" },
+  { name: "Ghalya Al Ansari", email: "gtansari@andrew.cmu.edu", photo_url: "/photos/43.png", role: "" },
+  { name: "Noor Al Sharif", email: "nsharif@andrew.cmu.edu", photo_url: "/photos/44.png", role: "" },
+  { name: "Hamad Al Thani", email: "hkthani@andrew.cmu.edu", photo_url: "/photos/45.png", role: "" },
+  { name: "Maha Al Suffar", email: "mhsuffar@andrew.cmu.edu", photo_url: "/photos/46.png", role: "" },
+  { name: "Nasser Alansari", email: "nalansar@andrew.cmu.edu", photo_url: "/photos/47.png", role: "" },
+  { name: "Jawaher Khaled Alsayed", email: "jalsayed@andrew.cmu.edu", photo_url: "/photos/48.png", role: "" },
+  { name: "Gana Elnajjar", email: "goe@andrew.cmu.edu", photo_url: "/photos/49.png", role: "" },
+  { name: "Mikaela Rae Florida", email: "mflorida@andrew.cmu.edu", photo_url: "/photos/50.png", role: "" },
+  { name: "Maeda H S Al Haidar", email: "mhsalhai@andrew.cmu.edu", photo_url: "/photos/51.png", role: "" },
+  { name: "Zhansaya Matkenova", email: "zmatkeno@andrew.cmu.edu", photo_url: "/photos/52.png", role: "" },
+  { name: "Jemal Velihanova", email: "jvelihan@andrew.cmu.edu", photo_url: "/photos/53.png", role: "" },
+  { name: "Ahmed Warraich", email: "awarraic@andrew.cmu.edu", photo_url: "/photos/54.png", role: "" },
+  { name: "Jana Abdelmaguid", email: "jabdelma@andrew.cmu.edu", photo_url: "/photos/55.png", role: "" },
+  { name: "Abrar Tasneem Abir", email: "aabir@andrew.cmu.edu", photo_url: "/photos/56.png", role: "" },
+  { name: "Rainier Agcaoili", email: "ragcaoil@andrew.cmu.edu", photo_url: "/photos/57.png", role: "" },
+  { name: "Abdulla Al Janahi", email: "aajanahi@andrew.cmu.edu", photo_url: "/photos/58.png", role: "" },
+  { name: "Seckhen Andrade Cuellar", email: "saandrad@andrew.cmu.edu", photo_url: "/photos/59.png", role: "" },
+  { name: "David Claudio", email: "dcnavarr@andrew.cmu.edu", photo_url: "/photos/60.png", role: "" },
+  { name: "Enoch Luis Catuncan", email: "escatunc@andrew.cmu.edu", photo_url: "/photos/61.png", role: "" },
+  { name: "Alikhan Chyngyz", email: "achyngyz@andrew.cmu.edu", photo_url: "/photos/62.png", role: "" },
+  { name: "Nikolaz Devidze", email: "ndevidze@andrew.cmu.edu", photo_url: "/photos/63.png", role: "" },
+  { name: "Mohamed Elsayed", email: "mtelsaye@andrew.cmu.edu", photo_url: "/photos/64.png", role: "" },
+  { name: "Mohamed Elzeni", email: "msmohame@andrew.cmu.edu", photo_url: "/photos/65.png", role: "" },
+  { name: "Jingxiang Gao", email: "jingxia3@andrew.cmu.edu", photo_url: "/photos/66.png", role: "" },
+  { name: "Aditya Gupta", email: "adityag4@andrew.cmu.edu", photo_url: "/photos/67.png", role: "" },
+  { name: "Zeina Halawa", email: "zrh@andrew.cmu.edu", photo_url: "/photos/68.png", role: "" },
+  { name: "Hamzah Hamad", email: "hwhamad@andrew.cmu.edu", photo_url: "/photos/69.png", role: "" },
+  { name: "Mohamed Hassaneen", email: "mohammee@andrew.cmu.edu", photo_url: "/photos/70.png", role: "" },
+  { name: "Malak Ibrahim", email: "mmibrahi@andrew.cmu.edu", photo_url: "/photos/71.png", role: "" },
+  { name: "Adan Jawad", email: "adanj@andrew.cmu.edu", photo_url: "/photos/72.png", role: "" },
+  { name: "Maryam Khodadadi", email: "mnkhodad@andrew.cmu.edu", photo_url: "/photos/73.png", role: "" },
+  { name: "Tram Tran", email: "tntran@andrew.cmu.edu", photo_url: "/photos/74.png", role: "" },
+  { name: "Aboud Abdalla", email: "aabdalla@andrew.cmu.edu", photo_url: "/photos/76.png", role: "" },
+  { name: "Steve Ndayambaje", email: "sndayamb@andrew.cmu.edu", photo_url: "/photos/75.png", role: "" },
+  { name: "Mugur Andrei Preda", email: "mpreda@andrew.cmu.edu", photo_url: "/photos/77.png", role: "" },
+  { name: "Gani Raissov", email: "graissov@andrew.cmu.edu", photo_url: "/photos/78.png", role: "" },
+  { name: "Raman Saparkhan", email: "rsaparkh@andrew.cmu.edu", photo_url: "/photos/79.png", role: "" },
+  { name: "Sunaya Upadhyay", email: "sunayau@andrew.cmu.edu", photo_url: "/photos/80.png", role: "" },
+  { name: "Abdallah Almana", email: "aalmana@andrew.cmu.edu", photo_url: "/photos/81.png", role: "" },
+  { name: "Haolin Wang", email: "haolinwa@andrew.cmu.edu", photo_url: "/photos/82.png", role: "" },
+  { name: "Abdallah Abdaljalil", email: "aabdalja@andrew.cmu.edu", photo_url: "/photos/83.png", role: "" },
+  { name: "Aya Abdelhamid", email: "ayaa@andrew.cmu.edu", photo_url: "/photos/84.png", role: "" },
+  { name: "Anel Adalbek", email: "aadalbek@andrew.cmu.edu", photo_url: "/photos/85.png", role: "" },
+  { name: "Rayyan Ahmed", email: "mrahmed@andrew.cmu.edu", photo_url: "/photos/86.png", role: "" },
+  { name: "Aisha Al Attiyah", email: "aattiyah@andrew.cmu.edu", photo_url: "/photos/87.png", role: "" },
+  { name: "Latifa Al Hitmi", email: "lhitmi@andrew.cmu.edu", photo_url: "/photos/88.png", role: "" },
+  { name: "Al Anoud Al Khulaifi", email: "amkhulai@andrew.cmu.edu", photo_url: "/photos/89.png", role: "" },
+  { name: "Haya Al Kubaisi", email: "hkkubais@andrew.cmu.edu", photo_url: "/photos/90.png", role: "" },
+  { name: "Ruba Al Mahmoud", email: "rmmahmou@andrew.cmu.edu", photo_url: "/photos/91.png", role: "" },
+  { name: "Abdulaziz Al Mannai", email: "abdulazm@andrew.cmu.edu", photo_url: "/photos/92.png", role: "" },
+  { name: "Khalifa Al Thani", email: "khalifat@andrew.cmu.edu", photo_url: "/photos/93.png", role: "" },
+  { name: "Moza Al Thani", email: "mthani2@andrew.cmu.edu", photo_url: "/photos/94.png", role: "" },
+  { name: "Ghalya Al Eshaq", email: "geshaq@andrew.cmu.edu", photo_url: "/photos/95.png", role: "" },
+  { name: "Fatima Al Haddad", email: "fhaddad@andrew.cmu.edu", photo_url: "/photos/96.png", role: "" },
+  { name: "Deema Al Mohanadi", email: "dmohanad@andrew.cmu.edu", photo_url: "/photos/97.png", role: "" },
+  { name: "Ahmad Al Obaidan", email: "akobaida@andrew.cmu.edu", photo_url: "/photos/98.png", role: "" },
+  { name: "Maryam Alkhater", email: "malkhate@andrew.cmu.edu", photo_url: "/photos/99.png", role: "" },
+  { name: "Nour Alseaf", email: "nalseaf@andrew.cmu.edu", photo_url: "/photos/100.png", role: "" },
+  { name: "Safa Amin", email: "sramin@andrew.cmu.edu", photo_url: "/photos/101.png", role: "" },
+  { name: "Ekaterina Demenkova", email: "edemenko@andrew.cmu.edu", photo_url: "/photos/102.png", role: "" },
+  { name: "Hazem Elsayed", email: "hmelsaye@andrew.cmu.edu", photo_url: "/photos/103.png", role: "" },
+  { name: "Retaj Samir Esmail Sharaf", email: "rsharaf@andrew.cmu.edu", photo_url: "/photos/104.png", role: "" },
+  { name: "Fatou Gueye", email: "fgueye@andrew.cmu.edu", photo_url: "/photos/105.png", role: "" },
+  { name: "Hiba Hamad", email: "hhamad@andrew.cmu.edu", photo_url: "/photos/106.png", role: "" },
+  { name: "Sarra Khelifi", email: "skhelifi@andrew.cmu.edu", photo_url: "/photos/107.png", role: "" },
+  { name: "Zahera Mahmud", email: "zmahmud@andrew.cmu.edu", photo_url: "/photos/108.png", role: "" },
+  { name: "Noor Niknam", email: "nniknam@andrew.cmu.edu", photo_url: "/photos/109.png", role: "" },
+  { name: "Reem Mohamed Saad Kensouh", email: "rkensouh@andrew.cmu.edu", photo_url: "/photos/110.png", role: "" },
+];
+
+// ── App init ──────────────────────────────────────────
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ hd: 'andrew.cmu.edu' }); // hint to Google to only show CMU accounts
+
+const SENIOR_EMAILS     = new Set(SENIORS.map(s => s.email.toLowerCase()));
+const EMOJI_PLACEHOLDERS = ["🌸","🌟","🎈","🎨","🌻","🎵","🌈","🏆","🦋","🌺","🎭","🦁"];
+
+let currentUser   = null;
+let currentSenior = null;
+let isAnon        = false;
+let attachedMedia = [];
+let unsubInbox    = null;
+let allLetters    = [];
+
+const $ = id => document.getElementById(id);
+let toastTimer;
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3400);
+}
+
+// ── SSO modal ─────────────────────────────────────────
+window.openSSOModal = function() {
+  $('sso-modal').style.display = 'flex';
+};
+window.closeSSOModal = function() {
+  $('sso-modal').style.display = 'none';
+};
+
+window.signInWithGoogle = async function() {
+  const btn = $('google-signin-btn');
+  btn.textContent = 'Signing in…';
+  btn.disabled = true;
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    const email = result.user.email.toLowerCase();
+    if (!email.endsWith(ALLOWED_DOMAIN)) {
+      // Wrong domain — sign them back out immediately
+      await signOut(auth);
+      showToast(`Please use your @andrew.cmu.edu account.`);
+      btn.disabled = false;
+      btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 48 48"><path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.7 33.9 29.8 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15 16.1 19.1 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 16.3 2 9.7 7.4 6.3 14.7z"/><path fill="#FBBC05" d="M24 46c5.5 0 10.5-1.9 14.3-5l-6.6-5.4C29.8 37 27 38 24 38c-5.7 0-10.6-3.1-11.8-7.5l-7 5.4C8.5 42.2 15.7 46 24 46z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.8c-.6 2.8-2.3 5.1-4.7 6.6l6.6 5.4C41.6 37.3 45 31.1 45 24c0-1.3-.2-2.7-.5-4z"/></svg> Continue with Google`;
+      return;
+    }
+    closeSSOModal();
+  } catch (e) {
+    if (e.code !== 'auth/popup-closed-by-user') {
+      showToast('Sign-in failed. Please try again.');
+      console.error(e);
+    }
+    btn.disabled = false;
+    btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 48 48"><path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.7 33.9 29.8 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15 16.1 19.1 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 16.3 2 9.7 7.4 6.3 14.7z"/><path fill="#FBBC05" d="M24 46c5.5 0 10.5-1.9 14.3-5l-6.6-5.4C29.8 37 27 38 24 38c-5.7 0-10.6-3.1-11.8-7.5l-7 5.4C8.5 42.2 15.7 46 24 46z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.8c-.6 2.8-2.3 5.1-4.7 6.6l6.6 5.4C41.6 37.3 45 31.1 45 24c0-1.3-.2-2.7-.5-4z"/></svg> Continue with Google`;
+  }
+};
+
+window.signOutUser = async function() {
+  if (unsubInbox) { unsubInbox(); unsubInbox = null; }
+  await signOut(auth);
+};
+
+// ── Auth state listener ───────────────────────────────
+onAuthStateChanged(auth, user => {
+  currentUser = user;
+  updateNav(user);
+  // If a senior just signed in and the mailbox isn't open yet, open it
+  if (user) {
+    const email = user.email.toLowerCase();
+    if (SENIOR_EMAILS.has(email)) {
+      const seniorData = SENIORS.find(s => s.email.toLowerCase() === email);
+      loadSeniorInbox(seniorData);
+      // Auto-open mailbox right after sign-in
+      if ($('sso-modal').style.display === 'none' || $('sso-modal').style.display === '') {
+        openMailboxForCurrentUser();
+      }
+    }
+  } else {
+    allLetters = [];
+    if (unsubInbox) { unsubInbox(); unsubInbox = null; }
+  }
+});
+
+function updateNav(user) {
+  if (!user) {
+    $('nav-signed-out').style.display = 'flex';
+    $('nav-signed-in').style.display  = 'none';
+    $('nav-not-senior').style.display = 'none';
+    return;
+  }
+  const email = user.email.toLowerCase();
+  const isSenior = SENIOR_EMAILS.has(email);
+  const seniorData = SENIORS.find(s => s.email.toLowerCase() === email);
+  const displayName = seniorData ? seniorData.name.split(' ')[0] : email.split('@')[0];
+
+  $('nav-signed-out').style.display = 'none';
+  if (isSenior) {
+    $('nav-signed-in').style.display  = 'flex';
+    $('nav-not-senior').style.display = 'none';
+    $('nav-user-name').textContent    = displayName;
+  } else {
+    $('nav-signed-in').style.display  = 'none';
+    $('nav-not-senior').style.display = 'flex';
+    $('nav-user-name-2').textContent  = displayName;
+  }
+}
+
+// ── Open mailbox for the currently signed-in senior ───
+window.openMailboxForCurrentUser = function() {
+  if (!currentUser) { openSSOModal(); return; }
+  const email = currentUser.email.toLowerCase();
+  const seniorData = SENIORS.find(s => s.email.toLowerCase() === email);
+  if (!seniorData) { showToast("Your account isn't on the seniors list."); return; }
+  openMailbox(seniorData);
+};
+
+// ── Load inbox via Firestore real-time listener ───────
+function loadSeniorInbox(seniorData) {
+  if (unsubInbox) { unsubInbox(); unsubInbox = null; }
+  const q = query(
+    collection(db, 'letters'),
+    where('toEmail', '==', seniorData.email.toLowerCase()),
+    orderBy('createdAt', 'desc')
+  );
+  unsubInbox = onSnapshot(q, snap => {
+    allLetters = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    // Refresh mailbox panel if it's open
+    if ($('mailbox-overlay').style.display === 'block') {
+      buildInbox(allLetters, seniorData);
+    }
+  });
+}
+
+const PHOTOS_PER_PAGE = 3; // how many photos side by side per slide
+const SLIDESHOW_PHOTOS = [
+  '/photos/slideshow1.JPG',
+  '/photos/slideshow2.jpg',
+  '/photos/slideshow3.JPG',
+  '/photos/slideshow4.JPG',
+  '/photos/slideshow5.JPG',
+  '/photos/slideshow6.JPG',
+  '/photos/slideshow7.JPG',
+  '/photos/slideshow8.JPG',
+  '/photos/slideshow9.JPG',
+  // just add more lines here and the collage updates automatically
+];
+
+// ── Page init — runs for everyone, no sign-in needed ──
+buildEnvelopes();
+buildSlideshow();
+
+// ── Envelope grid ─────────────────────────────────────
+async function buildEnvelopes() {
+  const grid = $('envelopes-grid');
+  grid.innerHTML = '';
+
+  SENIORS.forEach((senior, idx) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'envelope-wrap';
+    wrap.dataset.name = senior.name.toLowerCase();
+    wrap.dataset.role = (senior.role || '').toLowerCase();
+
+    const photoHTML = senior.photo_url
+      ? `<img class="env-photo" src="${senior.photo_url}" alt="${senior.name}"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+         <div class="env-photo-placeholder" style="display:none">${EMOJI_PLACEHOLDERS[idx % EMOJI_PLACEHOLDERS.length]}</div>`
+      : `<div class="env-photo-placeholder">${EMOJI_PLACEHOLDERS[idx % EMOJI_PLACEHOLDERS.length]}</div>`;
+
+    wrap.innerHTML = `
+      <div class="envelope-body">
+        ${photoHTML}
+        <div class="env-overlay"></div>
+      </div>
+    `;
+    wrap.addEventListener('click', () => openComposer(senior));
+    grid.appendChild(wrap);
+  });
+  updateSearchCount(SENIORS.length, SENIORS.length);
+}
+
+// ── Search ────────────────────────────────────────────
+window.filterEnvelopes = function(query) {
+  const q = query.trim().toLowerCase();
+  const wraps = document.querySelectorAll('.envelope-wrap');
+  let visible = 0;
+  wraps.forEach(w => {
+    const match = !q || w.dataset.name.includes(q) || w.dataset.role.includes(q);
+    w.classList.toggle('hidden', !match);
+    if (match) visible++;
+  });
+  updateSearchCount(visible, SENIORS.length);
+  const noRes = document.querySelector('.no-results');
+  if (visible === 0 && !noRes) {
+    const el = document.createElement('div');
+    el.className = 'no-results';
+    el.textContent = 'No seniors found. Try a different search.';
+    $('envelopes-grid').appendChild(el);
+  } else if (visible > 0 && noRes) noRes.remove();
+};
+function updateSearchCount(visible, total) {
+  $('search-count').textContent = visible < total ? `Showing ${visible} of ${total} seniors` : '';
+}
+
+// ── Mailbox overlay ───────────────────────────────────
+function buildInbox(letters, seniorData) {
+  const list = $('mailbox-list');
+  list.innerHTML = '';
+  if (letters.length === 0) {
+    list.innerHTML = '<div style="padding:2rem;text-align:center;color:#999;font-style:italic;">No letters yet — they\'re on their way 💌</div>';
+    return;
+  }
+  letters.forEach((letter, i) => {
+    const date = letter.createdAt?.toDate
+      ? letter.createdAt.toDate().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+      : '';
+    const item = document.createElement('div');
+    item.className = 'mailbox-item';
+    item.id = 'mitem-' + i;
+    item.innerHTML = `
+      <div class="mailbox-item-from">${letter.fromName}</div>
+      <div class="mailbox-item-date">${date}</div>
+    `;
+    item.onclick = () => openLetter(letter, i);
+    list.appendChild(item);
+  });
+}
+
+function openLetter(letter, idx) {
+  document.querySelectorAll('.mailbox-item').forEach(el => el.classList.remove('active'));
+  const item = $('mitem-' + idx);
+  if (item) item.classList.add('active');
+
+  const date = letter.createdAt?.toDate
+    ? letter.createdAt.toDate().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+    : '';
+
+  $('mailbox-reader').innerHTML = `
+    <div style="width:100%;height:100%;display:flex;flex-direction:column;padding:32px 48px;box-sizing:border-box;">
+      <div style="margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid #ddd;flex-shrink:0;">
+        <div style="font-size:1rem;color:#666;">From: <strong style="color:#1a1a2e;">${letter.fromName}</strong></div>
+        <div style="font-size:0.8rem;color:#aaa;margin-top:4px;">${date}</div>
+      </div>
+      <div style="
+        flex:1;
+        background:${letter.paper || '#fdf6e3'};
+        font-family:${letter.font || 'Lora, serif'};
+        padding:3rem 4rem;
+        border-radius:12px;
+        box-shadow:0 4px 24px rgba(0,0,0,0.08);
+        line-height:2;
+        font-size:1.05rem;
+        color:#2c1a0e;
+        white-space:pre-wrap;
+        overflow-y:auto;
+      ">${letter.text}</div>
+      ${letter.media && letter.media.length > 0 ? `
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:1.5rem;">
+        ${letter.media.map(m => m.type === 'photo'
+          ? `<img src="${m.dataUrl || m.url || ''}" style="max-width:100%;max-height:300px;border-radius:8px;object-fit:contain;"/>`
+          : `<video src="${m.dataUrl || m.url || ''}" controls style="max-width:100%;max-height:300px;border-radius:8px;"></video>`
+        ).join('')}
+      </div>` : ''}
+    </div>
+  `;
+}
+
+window.openMailbox = function(seniorData) {
+  $('mailbox-overlay').style.display = 'block';
+  $('mailbox-greeting').textContent = `${seniorData.name}'s inbox`;
+  buildInbox(allLetters, seniorData);
+  if (allLetters.length > 0) openLetter(allLetters[0], 0);
+};
+window.closeMailbox = function() {
+  $('mailbox-overlay').style.display = 'none';
+};
+
+window.toggleLetter = id => $(id).classList.toggle('expanded');
+window.switchTab = function(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  $('inbox-view').style.display = tab === 'inbox' ? 'block' : 'none';
+  $('write-view').style.display = tab === 'write' ? 'block' : 'none';
+  if (tab === 'write') $('envelopes-section').scrollIntoView({ behavior: 'smooth' });
+};
+
+// ── Composer — open to anyone ─────────────────────────
+window.openComposer = function(senior) {
+  currentSenior = senior;
+  $('composer-to-name').textContent = senior.name;
+  $('letter-text').value = '';
+  attachedMedia = [];
+  $('media-preview').innerHTML = '';
+  $('writing-area').style.background = '#fdf6e3';
+  $('letter-text').style.fontFamily = "'Lora', serif";
+  document.querySelectorAll('.paper-swatch').forEach((s, i) => s.classList.toggle('selected', i === 0));
+  document.querySelectorAll('.font-btn').forEach((b, i) => b.classList.toggle('selected', i === 0));
+
+  if (currentUser) {
+    // Signed in: default = show name, toggle to hide
+    isAnon = false;
+    $('anon-layout-guest').style.display = 'none';
+    $('anon-layout-user').style.display  = 'flex';
+    $('anon-toggle').classList.remove('on');
+    const knownSenior = SENIORS.find(s => s.email.toLowerCase() === currentUser.email.toLowerCase());
+    const displayName = knownSenior
+      ? knownSenior.name
+      : (currentUser.displayName || currentUser.email.split('@')[0].replace(/[._]/g, ' '));
+    $('signed-in-name-label').textContent = displayName;
+  } else {
+    // Not signed in: default = anonymous, opt in to add name
+    isAnon = true;
+    $('anon-layout-guest').style.display = 'flex';
+    $('anon-layout-user').style.display  = 'none';
+    $('guest-name-row').style.display    = 'none';
+    $('reveal-name-btn').textContent     = '+ Add your name';
+    const nameInput = $('sender-name');
+    if (nameInput) nameInput.value = '';
+  }
+
+  $('composer-overlay').classList.add('open');
+};
+window.closeComposer = () => $('composer-overlay').classList.remove('open');
+
+window.selectPaper = function(el, color) {
+  document.querySelectorAll('.paper-swatch').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+  $('writing-area').style.background = color;
+};
+window.selectFont = function(el) {
+  document.querySelectorAll('.font-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  $('letter-text').style.fontFamily = el.dataset.font;
+};
+
+// Guest: toggle name input visibility
+window.toggleGuestName = function() {
+  const row = $('guest-name-row');
+  const btn = $('reveal-name-btn');
+  const shown = row.style.display !== 'none';
+  row.style.display = shown ? 'none' : 'block';
+  btn.textContent   = shown ? '+ Add your name' : '− Hide name';
+  isAnon = shown; // name hidden → anonymous; name shown → not anonymous
+};
+
+// Signed-in: toggle anonymous
+window.toggleSignedInAnon = function() {
+  isAnon = !isAnon;
+  $('anon-toggle').classList.toggle('on', isAnon);
+};
+
+// ── Media: compress + convert to base64, store in Firestore directly ──
+// Max image dimension (px) and JPEG quality — tweak if letters feel slow to send
+const MAX_IMAGE_PX = 1000;
+const IMAGE_QUALITY = 0.7;
+
+window.uploadMedia = async function(input, type) {
+  const file = input.files[0];
+  if (!file) return;
+
+  // Reset input so the same file can be re-selected if needed
+  input.value = '';
+
+  // Show loading thumb immediately
+  const thumb = document.createElement('div');
+  thumb.className = 'media-thumb';
+  thumb.innerHTML = `<span style="font-size:11px;color:#888;">processing…</span>`;
+  $('media-preview').appendChild(thumb);
+
+  try {
+    let dataUrl;
+
+    if (type === 'photo') {
+      // Compress image via canvas before storing
+      dataUrl = await compressImage(file, MAX_IMAGE_PX, IMAGE_QUALITY);
+    } else {
+      // For video: just read as base64 (warn if large)
+      if (file.size > 10 * 1024 * 1024) {
+        thumb.remove();
+        showToast('Video is too large. Please use a file under 10 MB.');
+        return;
+      }
+      dataUrl = await readFileAsDataURL(file);
+    }
+
+    const idx = attachedMedia.length;
+    attachedMedia.push({ type, dataUrl });
+
+    thumb.id = 'mt-' + idx;
+    thumb.innerHTML = type === 'photo'
+      ? `<img src="${dataUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:7px;"/>
+         <button class="remove-media" onclick="removeMedia(${idx})">✕</button>`
+      : `🎬<span style="font-size:9px;position:absolute;bottom:2px;left:0;right:0;text-align:center;color:#555;">${(file.size/1024/1024).toFixed(1)}MB</span>
+         <button class="remove-media" onclick="removeMedia(${idx})">✕</button>`;
+
+    showToast(type === 'photo' ? 'Photo added! 📷' : 'Video added! 🎬');
+  } catch (e) {
+    thumb.remove();
+    showToast('Could not process file. Try a different one.');
+    console.error(e);
+  }
+};
+
+function readFileAsDataURL(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload  = e => resolve(e.target.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function compressImage(file, maxPx, quality) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = e => {
+      const img = new Image();
+      img.onerror = reject;
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > maxPx || height > maxPx) {
+          if (width > height) { height = Math.round(height * maxPx / width);  width = maxPx; }
+          else                { width  = Math.round(width  * maxPx / height); height = maxPx; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width  = width;
+        canvas.height = height;
+        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+window.removeMedia = function(idx) {
+  const el = $('mt-' + idx);
+  if (el) el.remove();
+  attachedMedia[idx] = null;
+};
+// ── Send letter — works signed in OR anonymous ────────
+window.sendLetter = async function() {
+  const text = $('letter-text').value.trim();
+  if (!text) { showToast('Write something first — even one line means everything 💛'); return; }
+
+  // Guard: don't send if a file is still being processed
+  const stillProcessing = $('media-preview').querySelector('.media-thumb span') &&
+    $('media-preview').querySelector('.media-thumb span').textContent === 'processing…';
+  if (stillProcessing) { showToast('Still processing your file, just a moment…'); return; }
+
+  const btn = document.querySelector('#composer-overlay .btn-wax');
+  btn.disabled = true;
+  btn.textContent = 'Sealing…';
+
+  let fromName = 'Anonymous';
+  if (!isAnon) {
+    if (currentUser) {
+      const knownSenior = SENIORS.find(s => s.email.toLowerCase() === currentUser.email.toLowerCase());
+      fromName = knownSenior
+        ? knownSenior.name
+        : (currentUser.displayName || currentUser.email.split('@')[0].replace(/[._]/g, ' '));
+    } else {
+      const typedName = $('sender-name') ? $('sender-name').value.trim() : '';
+      fromName = typedName || 'A classmate';
+    }
+  }
+
+  // Build clean media array — only entries that fully processed
+  const mediaToSave = attachedMedia
+    .filter(m => m && m.dataUrl)
+    .map(m => ({ type: m.type, dataUrl: m.dataUrl }));
+
+  try {
+    await addDoc(collection(db, 'letters'), {
+      toEmail:   currentSenior.email.toLowerCase(),
+      fromName,
+      fromEmail: (isAnon || !currentUser) ? null : currentUser.email.toLowerCase(),
+      text,
+      paper:     $('writing-area').style.background || '#fdf6e3',
+      font:      $('letter-text').style.fontFamily  || "'Lora', serif",
+      anonymous: isAnon,
+      media:     mediaToSave,
+      createdAt: serverTimestamp(),
+    });
+    closeComposer();
+    showToast('Letter sealed and delivered! 💌');
+  } catch (e) {
+    showToast('Something went wrong. Please try again.');
+    console.error('sendLetter error:', e);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Seal & Send ✉';
+  }
+};
+
+// const SLIDESHOW_PHOTOS = [
+//   'temp1.JPG',
+//   'temp2.jpg',
+//   'temp3.JPG',
+//   // just add more lines here and the collage updates automatically
+// ];
+
+
+function buildSlideshow() {
+  const container = $('collage-container');
+  if (!container || SLIDESHOW_PHOTOS.length === 0) return;
+
+  // Split photos into pages
+  const pages = [];
+  for (let i = 0; i < SLIDESHOW_PHOTOS.length; i += PHOTOS_PER_PAGE) {
+    pages.push(SLIDESHOW_PHOTOS.slice(i, i + PHOTOS_PER_PAGE));
+  }
+
+  // Build strip
+  const strip = document.createElement('div');
+  strip.className = 'collage-strip';
+  strip.id = 'collage-strip';
+
+  pages.forEach(page => {
+    const pageEl = document.createElement('div');
+    pageEl.className = 'collage-page';
+    page.forEach(url => {
+      const img = document.createElement('img');
+      img.src = url;
+      img.alt = '';
+      pageEl.appendChild(img);
+    });
+    strip.appendChild(pageEl);
+  });
+
+  // Build dots
+  const dotsEl = document.createElement('div');
+  dotsEl.className = 'collage-dots';
+  pages.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'collage-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    dotsEl.appendChild(dot);
+  });
+
+  container.innerHTML = '';
+  container.appendChild(strip);
+  container.appendChild(dotsEl);
+
+  // Auto advance
+// Auto advance
+  if (pages.length > 1) {
+    let cur = 0;
+    setInterval(() => {
+      cur = (cur + 1) % pages.length;
+      goToSlide(cur);
+    }, 4000);
+  }
+}
+
+function goToSlide(i) {
+  const strip = $('collage-strip');
+  if (strip) strip.style.transform = `translateX(-${i * 100}vw)`;
+  document.querySelectorAll('.collage-dot').forEach((d, j) => d.classList.toggle('active', j === i));
+}
+
+// // ── Slideshow ─────────────────────────────────────────
+// function buildSlideshow() {
+//   const dots   = $('slideshow-dots');
+//   const slides = document.querySelectorAll('.slide');
+//   dots.innerHTML = '';
+//   slides.forEach((_, i) => {
+//     const d = document.createElement('button');
+//     d.className = 'dot' + (i === 0 ? ' active' : '');
+//     d.onclick = () => goToSlide(i);
+//     dots.appendChild(d);
+//   });
+//   let cur = 0;
+//   setInterval(() => {
+//     slides[cur].classList.remove('active');
+//     document.querySelectorAll('.dot')[cur].classList.remove('active');
+//     cur = (cur + 1) % slides.length;
+//     slides[cur].classList.add('active');
+//     document.querySelectorAll('.dot')[cur].classList.add('active');
+//   }, 3400);
+// }
+// function goToSlide(i) {
+//   document.querySelectorAll('.slide').forEach((s, j) => s.classList.toggle('active', j === i));
+//   document.querySelectorAll('.dot').forEach((d, j) => d.classList.toggle('active', j === i));
+// }
+
+window.openModal  = id => $(id).classList.add('open');
+window.closeModal = id => $(id).classList.remove('open');
+</script>
+
+</body>
+</html>
