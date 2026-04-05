@@ -8,11 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Dancing+Script:wght@500;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet"/>
 <style>
-/* =====================================================
-   SENIOR LETTERS — Class of 2026
-   To edit seniors, find the SENIORS array in the
-   <script> at the bottom of this file.
-   ===================================================== */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -40,7 +35,6 @@ body {
   min-height: 100vh;
 }
 
-/* ===== HERO ===== */
 #collage-container {
   position: relative;
   width: 100%;
@@ -252,8 +246,6 @@ body {
 }
 
 
-
-/* ===== ENVELOPES GRID ===== */
 .envelopes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -291,7 +283,6 @@ body {
   background: var(--envelope-body);
 }
 
-/* Baby photo as full face background */
 .env-photo {
   position: absolute;
   inset: 0;
@@ -312,7 +303,6 @@ body {
   z-index: 1;
 }
 
-/* Vintage sepia overlay over photo */
 .env-overlay {
   position: absolute;
   inset: 0;
@@ -321,7 +311,6 @@ body {
   mix-blend-mode: multiply;
 }
 
-/* Flap on top */
 .env-flap {
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -397,7 +386,6 @@ body {
   margin-top: 3px;
 }
 
-/* ===== MODALS ===== */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -715,7 +703,6 @@ body {
 .inbox-letter-body.expanded { display: block; }
 .letter-media-row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
 
-/* ===== TOAST ===== */
 .toast {
   position: fixed;
   bottom: 28px;
@@ -778,7 +765,6 @@ body {
 </head>
 <body>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <!-- SSO SIGN-IN MODAL (shown only when a senior clicks My Letters) -->
@@ -819,7 +805,6 @@ body {
   </div>
 </nav>
 
-<!-- LETTER COMPOSER -->
 <div id="composer-overlay">
   <div class="composer-card">
     <div class="composer-header">
@@ -862,18 +847,33 @@ body {
 
     <div class="anon-row">
       <div style="display:flex;flex-direction:column;gap:8px;width:100%;">
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div class="toggle-switch" id="anon-toggle" onclick="toggleAnon()">
-            <div class="toggle-knob"></div>
+
+        <!-- Layout A: not signed in — default anonymous, opt in to add name -->
+        <div id="anon-layout-guest" style="display:none;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:0.85rem;color:var(--ink-faint);font-style:italic;">Sending anonymously</span>
+            <button id="reveal-name-btn" onclick="toggleGuestName()" style="margin-left:auto;font-family:'Lora',serif;font-size:0.78rem;padding:4px 12px;border:1.5px solid var(--envelope-shadow);border-radius:14px;background:transparent;cursor:pointer;color:var(--ink-light);transition:all 0.2s;" onmouseover="this.style.background='var(--parchment-dark)'" onmouseout="this.style.background='transparent'">+ Add your name</button>
           </div>
-          <label class="toggle-label" onclick="toggleAnon()">Send anonymously</label>
-          <span id="anon-note" style="font-size:0.78rem;color:var(--ink-faint);font-style:italic;margin-left:auto;">Your name will be shown</span>
+          <div id="guest-name-row" style="display:none;">
+            <input id="sender-name" type="text" placeholder="Your name"
+              style="width:100%;padding:8px 12px;border:1.5px solid var(--parchment-dark);border-radius:8px;font-family:'Lora',serif;font-size:0.9rem;color:var(--ink);outline:none;background:white;"
+              onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--parchment-dark)'"/>
+          </div>
         </div>
-        <div id="name-input-row" style="display:flex;align-items:center;gap:8px;">
-          <input id="sender-name" type="text" placeholder="Your name (optional)"
-            style="flex:1;padding:8px 12px;border:1.5px solid var(--parchment-dark);border-radius:8px;font-family:'Lora',serif;font-size:0.9rem;color:var(--ink);outline:none;background:white;"
-            onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--parchment-dark)'"/>
+
+        <!-- Layout B: signed in — default shows name, opt in to hide -->
+        <div id="anon-layout-user" style="display:none;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:0.85rem;color:var(--ink-light);">Sending as <strong id="signed-in-name-label"></strong></span>
+            <div style="display:flex;align-items:center;gap:7px;margin-left:auto;">
+              <div class="toggle-switch" id="anon-toggle" onclick="toggleSignedInAnon()">
+                <div class="toggle-knob"></div>
+              </div>
+              <label style="font-size:0.78rem;color:var(--ink-faint);font-style:italic;cursor:pointer;" onclick="toggleSignedInAnon()">Send anonymously</label>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
 
@@ -884,7 +884,6 @@ body {
   </div>
 </div>
 
-<!-- HERO -->
 <div id="hero">
   <div id="collage-container"></div>
 
@@ -897,42 +896,31 @@ body {
   </div>
 </div>
 
-<!-- SENIOR DASHBOARD -->
- <!-- SENIOR DASHBOARD -->
-<div id="dashboard-section">
-  <div class="tab-row">
-    <button class="tab-btn active" onclick="switchTab('inbox',this)">My Letters</button>
-    <button class="tab-btn" onclick="switchTab('write',this)">Write to Others</button>
-  </div>
-  <div id="inbox-view"></div>
-  <div id="write-view" style="display:none;">
-    <p style="text-align:center;font-style:italic;color:var(--ink-faint);margin-bottom:1rem;">Scroll down to find a senior and write to them</p>
-  </div>
-</div>
 
-<!-- OUTLOOK MAILBOX OVERLAY -->
 <div id="mailbox-overlay" style="display:none;position:fixed;inset:0;z-index:3000;background:#f3f2f1;font-family:Arial,sans-serif;">
 
-  <!-- Top bar -->
   <div style="background:#1a1a2e;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;height:50px;box-sizing:border-box;">
     <div style="display:flex;align-items:center;gap:8px;">
       <button id="mailbox-back-btn" onclick="mailboxShowList()" style="display:none;background:none;border:none;color:white;font-size:0.95rem;cursor:pointer;padding:4px 8px;margin-right:2px;">← Back</button>
       <span style="color:white;font-size:1.1rem;font-weight:600;">💌 My Letters</span>
       <span id="mailbox-greeting" style="color:rgba(255,255,255,0.6);font-size:0.85rem;"></span>
     </div>
-    <button onclick="closeMailbox()" style="background:none;border:none;color:white;font-size:1.4rem;cursor:pointer;padding:4px 10px;border-radius:4px;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='none'">✕</button>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button id="export-btn" onclick="exportLetters()" style="background:none;border:1px solid rgba(255,255,255,0.35);color:white;font-size:0.78rem;padding:5px 12px;border-radius:14px;cursor:pointer;font-family:'Lora',serif;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='none'">⬇ Export all</button>
+      <button onclick="closeMailbox()" style="background:none;border:none;color:white;font-size:1.4rem;cursor:pointer;padding:4px 10px;border-radius:4px;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='none'">✕</button>
+    </div>
   </div>
 
-  <!-- Main content — relative so absolute mobile panels work -->
+  
   <div style="display:flex;height:calc(100vh - 50px);position:relative;">
 
-    <!-- Left panel: letter list -->
+    
     <div id="mailbox-sidebar" style="width:320px;min-width:260px;background:white;border-right:1px solid #ddd;overflow-y:auto;flex-shrink:0;">
       <div style="padding:14px 16px;border-bottom:1px solid #eee;font-size:0.8rem;color:#666;text-transform:uppercase;letter-spacing:1px;font-weight:600;">Inbox</div>
       <div id="mailbox-list"></div>
     </div>
 
-    <!-- Right panel: open letter -->
+    
     <div id="mailbox-reader-wrap" style="flex:1;overflow-y:auto;">
       <div id="mailbox-reader" style="height:100%;display:flex;flex-direction:column;">
         <div style="text-align:center;color:#999;font-style:italic;padding:3rem;">
@@ -944,31 +932,15 @@ body {
 
   </div>
 </div>
-<!-- <div id="dashboard-section">
-  <div class="dashboard-header">
-    <h2 id="dashboard-greeting">Your Mailbox</h2>
-    <p id="dashboard-sub">Letters written just for you</p>
-  </div>
-  <div class="tab-row">
-    <button class="tab-btn active" onclick="switchTab('inbox',this)">My Letters</button>
-    <button class="tab-btn" onclick="switchTab('write',this)">Write to Others</button>
-  </div>
-  <div id="inbox-view">
-    <div class="letters-inbox" id="letters-inbox"></div>
-  </div>
-  <div id="write-view" style="display:none;">
-    <p style="text-align:center;font-style:italic;color:var(--ink-faint);margin-bottom:1rem;">Scroll down to find a senior and write to them</p>
-  </div>
-</div> -->
 
-<!-- ENVELOPES -->
+
 <div id="envelopes-section">
   <div class="section-header">
     <h2>The Class of 2026</h2>
     <p>Click on any envelope to write a letter</p>
   </div>
 
-  <!-- SEARCH -->
+
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
     <input type="text" id="search-input" placeholder="Search seniors by name or role…" oninput="filterEnvelopes(this.value)"/>
@@ -978,7 +950,6 @@ body {
   <div class="envelopes-grid" id="envelopes-grid"></div>
 </div>
 
-<!-- Firebase SDKs -->
 <script type="module">
 import { initializeApp }                       from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider,
@@ -988,7 +959,6 @@ import { getFirestore, collection, addDoc,
          query, where, orderBy, onSnapshot,
          serverTimestamp} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// ── Firebase config ───────────────────────────────────
 const firebaseConfig = {
   apiKey: "AIzaSyDuCcloTl8d4Rfd1W9iSrDe_X7EPDVf_tE",
   authDomain: "senior-letters.firebaseapp.com",
@@ -1000,7 +970,6 @@ const firebaseConfig = {
 
 const ALLOWED_DOMAIN = "@andrew.cmu.edu";
 
-// ── Seniors list ──────────────────────────────────────
 const SENIORS = [
   { name: "Hend Aldosari", email: "haldosar@andrew.cmu.edu", photo_url: "photos/1.png", role: "" },
   { name: "Imron Barotov", email: "ibarotov@andrew.cmu.edu", photo_url: "photos/2.png", role: "" },
@@ -1148,29 +1117,29 @@ window.closeSSOModal = function() {
   $('sso-modal').style.display = 'none';
 };
 
+const GOOGLE_BTN_HTML = `<svg width="20" height="20" viewBox="0 0 48 48"><path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.7 33.9 29.8 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15 16.1 19.1 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 16.3 2 9.7 7.4 6.3 14.7z"/><path fill="#FBBC05" d="M24 46c5.5 0 10.5-1.9 14.3-5l-6.6-5.4C29.8 37 27 38 24 38c-5.7 0-10.6-3.1-11.8-7.5l-7 5.4C8.5 42.2 15.7 46 24 46z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.8c-.6 2.8-2.3 5.1-4.7 6.6l6.6 5.4C41.6 37.3 45 31.1 45 24c0-1.3-.2-2.7-.5-4z"/></svg> Continue with Google`;
+
 window.signInWithGoogle = async function() {
   const btn = $('google-signin-btn');
-  btn.textContent = 'Signing in…';
+  btn.textContent = 'Opening Google sign-in…';
   btn.disabled = true;
   try {
     const result = await signInWithPopup(auth, googleProvider);
     const email = result.user.email.toLowerCase();
     if (!email.endsWith(ALLOWED_DOMAIN)) {
-      // Wrong domain — sign them back out immediately
       await signOut(auth);
       showToast(`Please use your @andrew.cmu.edu account.`);
-      btn.disabled = false;
-      btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 48 48"><path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.7 33.9 29.8 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15 16.1 19.1 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 16.3 2 9.7 7.4 6.3 14.7z"/><path fill="#FBBC05" d="M24 46c5.5 0 10.5-1.9 14.3-5l-6.6-5.4C29.8 37 27 38 24 38c-5.7 0-10.6-3.1-11.8-7.5l-7 5.4C8.5 42.2 15.7 46 24 46z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.8c-.6 2.8-2.3 5.1-4.7 6.6l6.6 5.4C41.6 37.3 45 31.1 45 24c0-1.3-.2-2.7-.5-4z"/></svg> Continue with Google`;
-      return;
+    } else {
+      closeSSOModal();
     }
-    closeSSOModal();
   } catch (e) {
-    if (e.code !== 'auth/popup-closed-by-user') {
-      showToast('Sign-in failed. Please try again.');
+    if (e.code !== 'auth/popup-closed-by-user' && e.code !== 'auth/cancelled-popup-request') {
+      showToast('Could not sign in. Please try again.');
       console.error(e);
     }
+  } finally {
     btn.disabled = false;
-    btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 48 48"><path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.7 33.9 29.8 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15 16.1 19.1 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 16.3 2 9.7 7.4 6.3 14.7z"/><path fill="#FBBC05" d="M24 46c5.5 0 10.5-1.9 14.3-5l-6.6-5.4C29.8 37 27 38 24 38c-5.7 0-10.6-3.1-11.8-7.5l-7 5.4C8.5 42.2 15.7 46 24 46z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.8c-.6 2.8-2.3 5.1-4.7 6.6l6.6 5.4C41.6 37.3 45 31.1 45 24c0-1.3-.2-2.7-.5-4z"/></svg> Continue with Google`;
+    btn.innerHTML = GOOGLE_BTN_HTML;
   }
 };
 
@@ -1179,18 +1148,15 @@ window.signOutUser = async function() {
   await signOut(auth);
 };
 
-// ── Auth state listener ───────────────────────────────
 onAuthStateChanged(auth, user => {
   currentUser = user;
   updateNav(user);
-  // If a senior just signed in and the mailbox isn't open yet, open it
   if (user) {
     const email = user.email.toLowerCase();
     if (SENIOR_EMAILS.has(email)) {
       const seniorData = SENIORS.find(s => s.email.toLowerCase() === email);
       loadSeniorInbox(seniorData);
-      // Auto-open mailbox right after sign-in
-      if ($('sso-modal').style.display === 'none' || $('sso-modal').style.display === '') {
+      if ($('sso-modal').style.display !== 'flex') {
         openMailboxForCurrentUser();
       }
     }
@@ -1224,7 +1190,6 @@ function updateNav(user) {
   }
 }
 
-// ── Open mailbox for the currently signed-in senior ───
 window.openMailboxForCurrentUser = function() {
   if (!currentUser) { openSSOModal(); return; }
   const email = currentUser.email.toLowerCase();
@@ -1233,7 +1198,6 @@ window.openMailboxForCurrentUser = function() {
   openMailbox(seniorData);
 };
 
-// ── Load inbox via Firestore real-time listener ───────
 function loadSeniorInbox(seniorData) {
   if (unsubInbox) { unsubInbox(); unsubInbox = null; }
   const q = query(
@@ -1243,7 +1207,6 @@ function loadSeniorInbox(seniorData) {
   );
   unsubInbox = onSnapshot(q, snap => {
     allLetters = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    // Refresh mailbox panel if it's open
     if ($('mailbox-overlay').style.display === 'block') {
       buildInbox(allLetters, seniorData);
     }
@@ -1268,7 +1231,6 @@ const SLIDESHOW_PHOTOS = [
 buildEnvelopes();
 buildSlideshow();
 
-// ── Envelope grid ─────────────────────────────────────
 async function buildEnvelopes() {
   const grid = $('envelopes-grid');
   grid.innerHTML = '';
@@ -1289,9 +1251,7 @@ async function buildEnvelopes() {
       <div class="envelope-body">
         ${photoHTML}
         <div class="env-overlay"></div>
-        <div class="env-letter-count" id="badge-${idx}" style="display:none">0</div>
       </div>
-
     `;
     wrap.addEventListener('click', () => openComposer(senior));
     grid.appendChild(wrap);
@@ -1299,7 +1259,6 @@ async function buildEnvelopes() {
   updateSearchCount(SENIORS.length, SENIORS.length);
 }
 
-// ── Search ────────────────────────────────────────────
 window.filterEnvelopes = function(query) {
   const q = query.trim().toLowerCase();
   const wraps = document.querySelectorAll('.envelope-wrap');
@@ -1322,7 +1281,6 @@ function updateSearchCount(visible, total) {
   $('search-count').textContent = visible < total ? `Showing ${visible} of ${total} seniors` : '';
 }
 
-// ── Mailbox overlay ───────────────────────────────────
 function buildInbox(letters, seniorData) {
   const list = $('mailbox-list');
   list.innerHTML = '';
@@ -1410,30 +1368,125 @@ window.closeMailbox = function() {
   $('mailbox-overlay').style.display = 'none';
 };
 
-window.toggleLetter = id => $(id).classList.toggle('expanded');
-window.switchTab = function(tab, btn) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  $('inbox-view').style.display = tab === 'inbox' ? 'block' : 'none';
-  $('write-view').style.display = tab === 'write' ? 'block' : 'none';
-  if (tab === 'write') $('envelopes-section').scrollIntoView({ behavior: 'smooth' });
+
+window.exportLetters = async function() {
+  if (!allLetters.length) { showToast('No letters to export yet.'); return; }
+
+  const btn = $('export-btn');
+  btn.textContent = '⏳ Preparing…';
+  btn.disabled = true;
+
+  try {
+    const zip = new JSZip();
+
+    allLetters.forEach((letter, i) => {
+      const date = letter.createdAt?.toDate
+        ? letter.createdAt.toDate().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+        : '';
+
+      // Sanitise filename: "01 - From A classmate.html"
+      const num    = String(i + 1).padStart(2, '0');
+      const sender = (letter.fromName || 'Anonymous').replace(/[^a-zA-Z0-9 _-]/g, '').trim().slice(0, 40);
+      const filename = `${num} - From ${sender}.html`;
+
+      // Build any attached images as <img> tags (dataUrls are already embedded)
+      const imagesHTML = letter.media && letter.media.length
+        ? letter.media
+            .filter(m => m.type === 'photo' && (m.dataUrl || m.url))
+            .map(m => `<img src="${m.dataUrl || m.url}" style="max-width:100%;border-radius:8px;margin-top:1rem;display:block;"/>`)
+            .join('\n')
+        : '';
+
+      const bg     = letter.paper || '#fdf6e3';
+      const font   = letter.font  || "'Lora', serif";
+      const text   = (letter.text || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+      const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Letter from ${sender}</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Dancing+Script:wght@500;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f5edd6; font-family: 'Lora', Georgia, serif; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 3rem 1rem; }
+  .envelope { background: white; border-radius: 16px; box-shadow: 0 8px 40px rgba(44,26,14,0.15); max-width: 680px; width: 100%; overflow: hidden; }
+  .envelope-header { background: #1a1a2e; padding: 1.5rem 2rem; }
+  .envelope-header .from { color: white; font-family: 'Dancing Script', cursive; font-size: 1.4rem; margin-bottom: 4px; }
+  .envelope-header .date { color: rgba(255,255,255,0.5); font-size: 0.82rem; font-style: italic; }
+  .letter-body { background: ${bg}; font-family: ${font}; padding: 3rem 3.5rem; line-height: 2; font-size: 1.05rem; color: #2c1a0e; white-space: pre-wrap; }
+  .images { padding: 1.5rem 3.5rem 2rem; background: ${bg}; }
+  @media (max-width: 500px) { .letter-body, .images { padding: 1.5rem; } }
+</style>
+</head>
+<body>
+  <div class="envelope">
+    <div class="envelope-header">
+      <div class="from">From: ${sender}</div>
+      <div class="date">${date}</div>
+    </div>
+    <div class="letter-body">${text}</div>
+    ${imagesHTML ? `<div class="images">${imagesHTML}</div>` : ''}
+  </div>
+</body>
+</html>`;
+
+      zip.file(filename, html);
+    });
+
+    // Generate and download the zip
+    const blob = await zip.generateAsync({ type: 'blob' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = 'my-letters.zip';
+    a.click();
+    URL.revokeObjectURL(url);
+
+    showToast(`Downloaded ${allLetters.length} letter${allLetters.length > 1 ? 's' : ''}! 💌`);
+  } catch (e) {
+    showToast('Export failed. Please try again.');
+    console.error('Export error:', e);
+  } finally {
+    btn.textContent = '⬇ Export all';
+    btn.disabled = false;
+  }
 };
 
-// ── Composer — open to anyone ─────────────────────────
+window.toggleLetter = id => $(id).classList.toggle('expanded');
+
 window.openComposer = function(senior) {
   currentSenior = senior;
   $('composer-to-name').textContent = senior.name;
   $('letter-text').value = '';
-  $('sender-name').value = '';
   attachedMedia = [];
   $('media-preview').innerHTML = '';
-  isAnon = false;
-  $('anon-toggle').classList.remove('on');
-  $('anon-note').textContent = currentUser ? 'Your name will be shown' : 'Sending as a classmate';
   $('writing-area').style.background = '#fdf6e3';
   $('letter-text').style.fontFamily = "'Lora', serif";
   document.querySelectorAll('.paper-swatch').forEach((s, i) => s.classList.toggle('selected', i === 0));
   document.querySelectorAll('.font-btn').forEach((b, i) => b.classList.toggle('selected', i === 0));
+
+  if (currentUser) {
+    isAnon = false;
+    $('anon-layout-guest').style.display = 'none';
+    $('anon-layout-user').style.display  = 'flex';
+    $('anon-toggle').classList.remove('on');
+    const knownSenior = SENIORS.find(s => s.email.toLowerCase() === currentUser.email.toLowerCase());
+    const displayName = knownSenior
+      ? knownSenior.name
+      : (currentUser.displayName || currentUser.email.split('@')[0].replace(/[._]/g, ' '));
+    $('signed-in-name-label').textContent = displayName;
+  } else {
+    isAnon = true;
+    $('anon-layout-guest').style.display = 'flex';
+    $('anon-layout-user').style.display  = 'none';
+    $('guest-name-row').style.display    = 'none';
+    $('reveal-name-btn').textContent     = '+ Add your name';
+    const nameInput = $('sender-name');
+    if (nameInput) nameInput.value = '';
+  }
+
   $('composer-overlay').classList.add('open');
 };
 window.closeComposer = () => $('composer-overlay').classList.remove('open');
@@ -1448,24 +1501,27 @@ window.selectFont = function(el) {
   el.classList.add('selected');
   $('letter-text').style.fontFamily = el.dataset.font;
 };
-window.toggleAnon = function() {
+window.toggleGuestName = function() {
+  const row = $('guest-name-row');
+  const btn = $('reveal-name-btn');
+  const shown = row.style.display !== 'none';
+  row.style.display = shown ? 'none' : 'block';
+  btn.textContent   = shown ? '+ Add your name' : '− Hide name';
+  isAnon = shown;
+};
+window.toggleSignedInAnon = function() {
   isAnon = !isAnon;
   $('anon-toggle').classList.toggle('on', isAnon);
-  $('anon-note').textContent = isAnon ? 'Name hidden — sent anonymously' : 'Your name will be shown';
-  $('name-input-row').style.display = isAnon ? 'none' : 'flex';
 };
 
-// ── Media: compress + convert to base64, store in Firestore directly ──
-// Max image dimension (px) and JPEG quality — tweak if letters feel slow to send
 const MAX_IMAGE_PX = 1000;
 const IMAGE_QUALITY = 0.7;
 
 window.uploadMedia = async function(input, type) {
   const files = Array.from(input.files);
   if (!files.length) return;
-  input.value = ''; // reset so same files can be re-selected
+  input.value = ''; 
 
-  // Process each file independently so they all show progress
   for (const file of files) {
     const thumb = document.createElement('div');
     thumb.className = 'media-thumb';
@@ -1527,12 +1583,11 @@ window.removeMedia = function(idx) {
   if (el) el.remove();
   attachedMedia[idx] = null;
 };
-// ── Send letter — works signed in OR anonymous ────────
+
 window.sendLetter = async function() {
   const text = $('letter-text').value.trim();
   if (!text) { showToast('Write something first — even one line means everything 💛'); return; }
 
-  // Guard: don't send if a file is still being processed
   const stillProcessing = $('media-preview').querySelector('.media-thumb span') &&
     $('media-preview').querySelector('.media-thumb span').textContent === 'processing…';
   if (stillProcessing) { showToast('Still processing your file, just a moment…'); return; }
@@ -1543,16 +1598,14 @@ window.sendLetter = async function() {
 
   let fromName = 'Anonymous';
   if (!isAnon) {
-    const typedName = $('sender-name').value.trim();
-    if (typedName) {
-      fromName = typedName;
-    } else if (currentUser) {
+    if (currentUser) {
       const knownSenior = SENIORS.find(s => s.email.toLowerCase() === currentUser.email.toLowerCase());
       fromName = knownSenior
         ? knownSenior.name
         : (currentUser.displayName || currentUser.email.split('@')[0].replace(/[._]/g, ' '));
     } else {
-      fromName = 'A classmate';
+      const typedName = $('sender-name') ? $('sender-name').value.trim() : '';
+      fromName = typedName || 'A classmate';
     }
   }
 
@@ -1575,16 +1628,6 @@ window.sendLetter = async function() {
     });
     closeComposer();
     showToast('Letter sealed and delivered! 💌');
-
-    // Update badge count on envelope
-    const idx = SENIORS.findIndex(s => s.email === currentSenior.email);
-    if (idx >= 0) {
-      const badge = $('badge-' + idx);
-      if (badge) {
-        badge.textContent = parseInt(badge.textContent || '0') + 1;
-        badge.style.display = 'block';
-      }
-    }
   } catch (e) {
     showToast('Something went wrong. Please try again.');
     console.error('sendLetter error:', e);
@@ -1594,25 +1637,15 @@ window.sendLetter = async function() {
   }
 };
 
-// const SLIDESHOW_PHOTOS = [
-//   'temp1.JPG',
-//   'temp2.jpg',
-//   'temp3.JPG',
-//   // just add more lines here and the collage updates automatically
-// ];
-
-
 function buildSlideshow() {
   const container = $('collage-container');
   if (!container || SLIDESHOW_PHOTOS.length === 0) return;
 
-  // Split photos into pages
   const pages = [];
   for (let i = 0; i < SLIDESHOW_PHOTOS.length; i += PHOTOS_PER_PAGE) {
     pages.push(SLIDESHOW_PHOTOS.slice(i, i + PHOTOS_PER_PAGE));
   }
 
-  // Build strip
   const strip = document.createElement('div');
   strip.className = 'collage-strip';
   strip.id = 'collage-strip';
@@ -1643,8 +1676,6 @@ function buildSlideshow() {
   container.appendChild(strip);
   container.appendChild(dotsEl);
 
-  // Auto advance
-// Auto advance
   if (pages.length > 1) {
     let cur = 0;
     setInterval(() => {
@@ -1689,5 +1720,6 @@ window.openModal  = id => $(id).classList.add('open');
 window.closeModal = id => $(id).classList.remove('open');
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </body>
 </html>
