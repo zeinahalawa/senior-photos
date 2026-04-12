@@ -378,6 +378,13 @@ body {
   color: var(--ink);
   text-align: center;
 }
+.senior-role {
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  font-style: italic;
+  text-align: center;
+  margin-top: 3px;
+}
 
 .modal-overlay {
   display: none;
@@ -895,7 +902,7 @@ body {
   <div style="background:#1a1a2e;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;height:50px;box-sizing:border-box;">
     <div style="display:flex;align-items:center;gap:8px;">
       <button id="mailbox-back-btn" onclick="mailboxShowList()" style="display:none;background:none;border:none;color:white;font-size:0.95rem;cursor:pointer;padding:4px 8px;margin-right:2px;">← Back</button>
-      <span style="color:white;font-size:1.1rem;font-weight:600;">My Letters</span>
+      <span style="color:white;font-size:1.1rem;font-weight:600;">💌 My Letters</span>
       <span id="mailbox-greeting" style="color:rgba(255,255,255,0.6);font-size:0.85rem;"></span>
     </div>
     <div style="display:flex;align-items:center;gap:8px;">
@@ -936,7 +943,7 @@ body {
 
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
-    <input type="text" id="search-input" placeholder="Search seniors by name..." oninput="filterEnvelopes(this.value)"/>
+    <input type="text" id="search-input" placeholder="Search seniors by name or role…" oninput="filterEnvelopes(this.value)"/>
   </div>
   <div class="search-count" id="search-count"></div>
 
@@ -963,116 +970,118 @@ const firebaseConfig = {
 
 const ALLOWED_DOMAIN = "@andrew.cmu.edu";
 
+const RELEASE_TIME = new Date('2026-04-03T18:00:00+03:00');
+
 const SENIORS = [
-  { name: "Hend Aldosari", email: "haldosar@andrew.cmu.edu", photo_url: "photos/1.png"},
-  { name: "Imron Barotov", email: "ibarotov@andrew.cmu.edu", photo_url: "photos/2.png"},
-  { name: "Mohammad Khan", email: "mhk2@andrew.cmu.edu", photo_url: "photos/3.png"},
-  { name: "Mariam Abdelatef", email: "mabdelat@andrew.cmu.edu", photo_url: "photos/4.png"  },
-  { name: "Cynthia Akaliza", email: "cakaliza@andrew.cmu.edu", photo_url: "photos/5.png"  },
-  { name: "Abdulla Al Hemaidi", email: "aahemaid@andrew.cmu.edu", photo_url: "photos/6.png"  },
-  { name: "Al Jazi Al Khulaifi", email: "akhulaif@andrew.cmu.edu", photo_url: "photos/7.png"  },
-  { name: "Abdulaziz Al Mana", email: "anmana@andrew.cmu.edu", photo_url: "photos/8.png"  },
-  { name: "Dema Al Shirawi", email: "dshirawi@andrew.cmu.edu", photo_url: "photos/9.png"  },
-  { name: "Maryam Al Suwaidi", email: "malsuwai@andrew.cmu.edu", photo_url: "photos/10.png"  },
-  { name: "Haya Al Anssari", email: "hanssari@andrew.cmu.edu", photo_url: "photos/12.png"  },
-  { name: "Aljazi Al Harami", email: "aharami@andrew.cmu.edu", photo_url: "photos/13.png"  },
-  { name: "Nawaf Al Khalifa", email: "nmkhalif@andrew.cmu.edu", photo_url: "photos/14.png"  },
-  { name: "Ahmad Al Sulaiti", email: "ahmadsul@andrew.cmu.edu", photo_url: "photos/15.png"  },
-  { name: "Nada Alaeddine", email: "nnalaedd@andrew.cmu.edu", photo_url: "photos/16.png"  },
-  { name: "Gabriel Almeida", email: "gsouza@andrew.cmu.edu", photo_url: "photos/17.png"  },
-  { name: "Fatima Almuftah", email: "falmufta@andrew.cmu.edu", photo_url: "photos/18.png"  },
-  { name: "Shaikha Almutawa", email: "salmutaw@andrew.cmu.edu", photo_url: "photos/19.png"  },
-  { name: "Saif Alnamla", email: "salnamla@andrew.cmu.edu", photo_url: "photos/20.png"  },
-  { name: "Sultan Balgabay", email: "sbalgaba@andrew.cmu.edu", photo_url: "photos/21.png"  },
-  { name: "Sheentaro Borras", email: "ssborras@andrew.cmu.edu", photo_url: "photos/22.png"  },
-  { name: "Julia Nicole Castillo", email: "julianic@andrew.cmu.edu", photo_url: "photos/23.png"  },
-  { name: "Phat Diep", email: "phdiep@andrew.cmu.edu", photo_url: "photos/24.png"  },
-  { name: "Zaid Hijazi", email: "zhijazi@andrew.cmu.edu", photo_url: "photos/25.png"  },
-  { name: "Abduraim Jamshodov", email: "ajamshod@andrew.cmu.edu", photo_url: "photos/26.png"  },
-  { name: "Ulpan Kaiyrbayeva", email: "ukaiyrba@andrew.cmu.edu", photo_url: "photos/27.png"  },
-  { name: "Omar Khalaf", email: "okhalaf@andrew.cmu.edu", photo_url: "photos/28.png"  },
-  { name: "Miras Kurmangali", email: "mkurmang@andrew.cmu.edu", photo_url: "photos/29.png"  },
-  { name: "Rediet Lemma", email: "rlemma@andrew.cmu.edu", photo_url: "photos/30.png"  },
-  { name: "Zeina Mahdi Mahmoud", email: "zmahmoud@andrew.cmu.edu", photo_url: "photos/31.png"  },
-  { name: "Jade Mathias", email: "jmathias@andrew.cmu.edu", photo_url: "photos/32.png"  },
-  { name: "Hala Naim", email: "hnaim@andrew.cmu.edu", photo_url: "photos/33.png"  },
-  { name: "Jennie Nguyen", email: "qdn@andrew.cmu.edu", photo_url: "photos/34.png"  },
-  { name: "Azizjon Samandarov", email: "asamanda@andrew.cmu.edu", photo_url: "photos/35.png"  },
-  { name: "Akniyet Serikbay", email: "aserikba@andrew.cmu.edu", photo_url: "photos/36.png"  },
-  { name: "Mahnoor Sethi", email: "mahnoors@andrew.cmu.edu", photo_url: "photos/37.png"  },
-  { name: "Mayowa Abayomi", email: "mabayomi@andrew.cmu.edu", photo_url: "photos/38.png"  },
-  { name: "Khalid Al Abdulla", email: "kabdulla@andrew.cmu.edu", photo_url: "photos/39.png"  },
-  { name: "Saja Al Balushi", email: "sbalushi@andrew.cmu.edu", photo_url: "photos/40.png"  },
-  { name: "Salma Al Hardan", email: "shardan@andrew.cmu.edu", photo_url: "photos/41.png"  },
-  { name: "Noora Al Kuwari", email: "noorakuw@andrew.cmu.edu", photo_url: "photos/42.png"  },
-  { name: "Ghalya Al Ansari", email: "gtansari@andrew.cmu.edu", photo_url: "photos/43.png"  },
-  { name: "Noor Al Sharif", email: "nsharif@andrew.cmu.edu", photo_url: "photos/44.png"  },
-  { name: "Hamad Al Thani", email: "hkthani@andrew.cmu.edu", photo_url: "photos/45.png"  },
-  { name: "Maha Al Suffar", email: "mhsuffar@andrew.cmu.edu", photo_url: "photos/46.png"  },
-  { name: "Nasser Alansari", email: "nalansar@andrew.cmu.edu", photo_url: "photos/47.png"  },
-  { name: "Jawaher Khaled Alsayed", email: "jalsayed@andrew.cmu.edu", photo_url: "photos/48.png"  },
-  { name: "Gana Elnajjar", email: "goe@andrew.cmu.edu", photo_url: "photos/49.png"  },
-  { name: "Mikaela Rae Florida", email: "mflorida@andrew.cmu.edu", photo_url: "photos/50.png"  },
-  { name: "Maeda H S Al Haidar", email: "mhsalhai@andrew.cmu.edu", photo_url: "photos/51.png"  },
-  { name: "Zhansaya Matkenova", email: "zmatkeno@andrew.cmu.edu", photo_url: "photos/52.png"  },
-  { name: "Jemal Velihanova", email: "jvelihan@andrew.cmu.edu", photo_url: "photos/53.png"  },
-  { name: "Ahmed Warraich", email: "awarraic@andrew.cmu.edu", photo_url: "photos/54.png"  },
-  { name: "Jana Abdelmaguid", email: "jabdelma@andrew.cmu.edu", photo_url: "photos/55.png"  },
-  { name: "Abrar Tasneem Abir", email: "aabir@andrew.cmu.edu", photo_url: "photos/56.png"  },
-  { name: "Rainier Agcaoili", email: "ragcaoil@andrew.cmu.edu", photo_url: "photos/57.png"  },
-  { name: "Abdulla Al Janahi", email: "aajanahi@andrew.cmu.edu", photo_url: "photos/58.png"  },
-  { name: "Seckhen Andrade Cuellar", email: "saandrad@andrew.cmu.edu", photo_url: "photos/59.png"  },
-  { name: "David Claudio", email: "dcnavarr@andrew.cmu.edu", photo_url: "photos/60.png"  },
-  { name: "Enoch Luis Catuncan", email: "escatunc@andrew.cmu.edu", photo_url: "photos/61.png"  },
-  { name: "Alikhan Chyngyz", email: "achyngyz@andrew.cmu.edu", photo_url: "photos/62.png"  },
-  { name: "Nikolaz Devidze", email: "ndevidze@andrew.cmu.edu", photo_url: "photos/63.png"  },
-  { name: "Mohamed Elsayed", email: "mtelsaye@andrew.cmu.edu", photo_url: "photos/64.png"  },
-  { name: "Mohamed Elzeni", email: "msmohame@andrew.cmu.edu", photo_url: "photos/65.png"  },
-  { name: "Jingxiang Gao", email: "jingxia3@andrew.cmu.edu", photo_url: "photos/66.png"  },
-  { name: "Aditya Gupta", email: "adityag4@andrew.cmu.edu", photo_url: "photos/67.png"  },
-  { name: "Zeina Halawa", email: "zrh@andrew.cmu.edu", photo_url: "photos/68.png"  },
-  { name: "Hamzah Hamad", email: "hwhamad@andrew.cmu.edu", photo_url: "photos/69.png"  },
-  { name: "Mohamed Hassaneen", email: "mohammee@andrew.cmu.edu", photo_url: "photos/70.png"  },
-  { name: "Malak Ibrahim", email: "mmibrahi@andrew.cmu.edu", photo_url: "photos/71.png"  },
-  { name: "Adan Jawad", email: "adanj@andrew.cmu.edu", photo_url: "photos/72.png"  },
-  { name: "Maryam Khodadadi", email: "mnkhodad@andrew.cmu.edu", photo_url: "photos/73.png"  },
-  { name: "Tram Tran", email: "tntran@andrew.cmu.edu", photo_url: "photos/74.png"  },
-  { name: "Aboud Abdalla", email: "aabdalla@andrew.cmu.edu", photo_url: "photos/76.png"  },
-  { name: "Steve Ndayambaje", email: "sndayamb@andrew.cmu.edu", photo_url: "photos/75.png"  },
-  { name: "Mugur Andrei Preda", email: "mpreda@andrew.cmu.edu", photo_url: "photos/77.png"  },
-  { name: "Gani Raissov", email: "graissov@andrew.cmu.edu", photo_url: "photos/78.png"  },
-  { name: "Raman Saparkhan", email: "rsaparkh@andrew.cmu.edu", photo_url: "photos/79.png"  },
-  { name: "Sunaya Upadhyay", email: "sunayau@andrew.cmu.edu", photo_url: "photos/80.png"  },
-  { name: "Abdallah Almana", email: "aalmana@andrew.cmu.edu", photo_url: "photos/81.png"  },
-  { name: "Haolin Wang", email: "haolinwa@andrew.cmu.edu", photo_url: "photos/82.png"  },
-  { name: "Abdallah Abdaljalil", email: "aabdalja@andrew.cmu.edu", photo_url: "photos/83.png"  },
-  { name: "Aya Abdelhamid", email: "ayaa@andrew.cmu.edu", photo_url: "photos/84.png"  },
-  { name: "Anel Adalbek", email: "aadalbek@andrew.cmu.edu", photo_url: "photos/85.png"  },
-  { name: "Rayyan Ahmed", email: "mrahmed@andrew.cmu.edu", photo_url: "photos/86.png"  },
-  { name: "Aisha Al Attiyah", email: "aattiyah@andrew.cmu.edu", photo_url: "photos/87.png"  },
-  { name: "Latifa Al Hitmi", email: "lhitmi@andrew.cmu.edu", photo_url: "photos/88.png"  },
-  { name: "Al Anoud Al Khulaifi", email: "amkhulai@andrew.cmu.edu", photo_url: "photos/89.png"  },
-  { name: "Haya Al Kubaisi", email: "hkkubais@andrew.cmu.edu", photo_url: "photos/90.png"  },
-  { name: "Ruba Al Mahmoud", email: "rmmahmou@andrew.cmu.edu", photo_url: "photos/91.png"  },
-  { name: "Abdulaziz Al Mannai", email: "abdulazm@andrew.cmu.edu", photo_url: "photos/92.png"  },
-  { name: "Khalifa Al Thani", email: "khalifat@andrew.cmu.edu", photo_url: "photos/93.png"  },
-  { name: "Moza Al Thani", email: "mthani2@andrew.cmu.edu", photo_url: "photos/94.png"  },
-  { name: "Ghalya Al Eshaq", email: "geshaq@andrew.cmu.edu", photo_url: "photos/95.png"  },
-  { name: "Fatima Al Haddad", email: "fhaddad@andrew.cmu.edu", photo_url: "photos/96.png"  },
-  { name: "Deema Al Mohanadi", email: "dmohanad@andrew.cmu.edu", photo_url: "photos/97.png"  },
-  { name: "Ahmad Al Obaidan", email: "akobaida@andrew.cmu.edu", photo_url: "photos/98.png"  },
-  { name: "Maryam Alkhater", email: "malkhate@andrew.cmu.edu", photo_url: "photos/99.png"  },
-  { name: "Nour Alseaf", email: "nalseaf@andrew.cmu.edu", photo_url: "photos/100.png"  },
-  { name: "Safa Amin", email: "sramin@andrew.cmu.edu", photo_url: "photos/101.png"  },
-  { name: "Ekaterina Demenkova", email: "edemenko@andrew.cmu.edu", photo_url: "photos/102.png"  },
-  { name: "Hazem Elsayed", email: "hmelsaye@andrew.cmu.edu", photo_url: "photos/103.png"  },
-  { name: "Retaj Samir Esmail Sharaf", email: "rsharaf@andrew.cmu.edu", photo_url: "photos/104.png"  },
-  { name: "Fatou Gueye", email: "fgueye@andrew.cmu.edu", photo_url: "photos/105.png"  },
-  { name: "Hiba Hamad", email: "hhamad@andrew.cmu.edu", photo_url: "photos/106.png"  },
-  { name: "Sarra Khelifi", email: "skhelifi@andrew.cmu.edu", photo_url: "photos/107.png"  },
-  { name: "Zahera Mahmud", email: "zmahmud@andrew.cmu.edu", photo_url: "photos/108.png"  },
-  { name: "Noor Niknam", email: "nniknam@andrew.cmu.edu", photo_url: "photos/109.png"  },
-  { name: "Reem Mohamed Saad Kensouh", email: "rkensouh@andrew.cmu.edu", photo_url: "photos/110.png"  },
+  { name: "Hend Aldosari", email: "haldosar@andrew.cmu.edu", photo_url: "photos/1.png", role: "" },
+  { name: "Imron Barotov", email: "ibarotov@andrew.cmu.edu", photo_url: "photos/2.png", role: "" },
+  { name: "Mohammad Khan", email: "mhk2@andrew.cmu.edu", photo_url: "photos/3.png", role: "" },
+  { name: "Mariam Abdelatef", email: "mabdelat@andrew.cmu.edu", photo_url: "photos/4.png", role: "" },
+  { name: "Cynthia Akaliza", email: "cakaliza@andrew.cmu.edu", photo_url: "photos/5.png", role: "" },
+  { name: "Abdulla Al Hemaidi", email: "aahemaid@andrew.cmu.edu", photo_url: "photos/6.png", role: "" },
+  { name: "Al Jazi Al Khulaifi", email: "akhulaif@andrew.cmu.edu", photo_url: "photos/7.png", role: "" },
+  { name: "Abdulaziz Al Mana", email: "anmana@andrew.cmu.edu", photo_url: "photos/8.png", role: "" },
+  { name: "Dema Al Shirawi", email: "dshirawi@andrew.cmu.edu", photo_url: "photos/9.png", role: "" },
+  { name: "Maryam Al Suwaidi", email: "malsuwai@andrew.cmu.edu", photo_url: "photos/10.png", role: "" },
+  { name: "Haya Al Anssari", email: "hanssari@andrew.cmu.edu", photo_url: "photos/12.png", role: "" },
+  { name: "Aljazi Al Harami", email: "aharami@andrew.cmu.edu", photo_url: "photos/13.png", role: "" },
+  { name: "Nawaf Al Khalifa", email: "nmkhalif@andrew.cmu.edu", photo_url: "photos/14.png", role: "" },
+  { name: "Ahmad Al Sulaiti", email: "ahmadsul@andrew.cmu.edu", photo_url: "photos/15.png", role: "" },
+  { name: "Nada Alaeddine", email: "nnalaedd@andrew.cmu.edu", photo_url: "photos/16.png", role: "" },
+  { name: "Gabriel Almeida", email: "gsouza@andrew.cmu.edu", photo_url: "photos/17.png", role: "" },
+  { name: "Fatima Almuftah", email: "falmufta@andrew.cmu.edu", photo_url: "photos/18.png", role: "" },
+  { name: "Shaikha Almutawa", email: "salmutaw@andrew.cmu.edu", photo_url: "photos/19.png", role: "" },
+  { name: "Saif Alnamla", email: "salnamla@andrew.cmu.edu", photo_url: "photos/20.png", role: "" },
+  { name: "Sultan Balgabay", email: "sbalgaba@andrew.cmu.edu", photo_url: "photos/21.png", role: "" },
+  { name: "Sheentaro Borras", email: "ssborras@andrew.cmu.edu", photo_url: "photos/22.png", role: "" },
+  { name: "Julia Nicole Castillo", email: "julianic@andrew.cmu.edu", photo_url: "photos/23.png", role: "" },
+  { name: "Phat Diep", email: "phdiep@andrew.cmu.edu", photo_url: "photos/24.png", role: "" },
+  { name: "Zaid Hijazi", email: "zhijazi@andrew.cmu.edu", photo_url: "photos/25.png", role: "" },
+  { name: "Abduraim Jamshodov", email: "ajamshod@andrew.cmu.edu", photo_url: "photos/26.png", role: "" },
+  { name: "Ulpan Kaiyrbayeva", email: "ukaiyrba@andrew.cmu.edu", photo_url: "photos/27.png", role: "" },
+  { name: "Omar Khalaf", email: "okhalaf@andrew.cmu.edu", photo_url: "photos/28.png", role: "" },
+  { name: "Miras Kurmangali", email: "mkurmang@andrew.cmu.edu", photo_url: "photos/29.png", role: "" },
+  { name: "Rediet Lemma", email: "rlemma@andrew.cmu.edu", photo_url: "photos/30.png", role: "" },
+  { name: "Zeina Mahdi Mahmoud", email: "zmahmoud@andrew.cmu.edu", photo_url: "photos/31.png", role: "" },
+  { name: "Jade Mathias", email: "jmathias@andrew.cmu.edu", photo_url: "photos/32.png", role: "" },
+  { name: "Hala Naim", email: "hnaim@andrew.cmu.edu", photo_url: "photos/33.png", role: "" },
+  { name: "Jennie Nguyen", email: "qdn@andrew.cmu.edu", photo_url: "photos/34.png", role: "" },
+  { name: "Azizjon Samandarov", email: "asamanda@andrew.cmu.edu", photo_url: "photos/35.png", role: "" },
+  { name: "Akniyet Serikbay", email: "aserikba@andrew.cmu.edu", photo_url: "photos/36.png", role: "" },
+  { name: "Mahnoor Sethi", email: "mahnoors@andrew.cmu.edu", photo_url: "photos/37.png", role: "" },
+  { name: "Mayowa Abayomi", email: "mabayomi@andrew.cmu.edu", photo_url: "photos/38.png", role: "" },
+  { name: "Khalid Al Abdulla", email: "kabdulla@andrew.cmu.edu", photo_url: "photos/39.png", role: "" },
+  { name: "Saja Al Balushi", email: "sbalushi@andrew.cmu.edu", photo_url: "photos/40.png", role: "" },
+  { name: "Salma Al Hardan", email: "shardan@andrew.cmu.edu", photo_url: "photos/41.png", role: "" },
+  { name: "Noora Al Kuwari", email: "noorakuw@andrew.cmu.edu", photo_url: "photos/42.png", role: "" },
+  { name: "Ghalya Al Ansari", email: "gtansari@andrew.cmu.edu", photo_url: "photos/43.png", role: "" },
+  { name: "Noor Al Sharif", email: "nsharif@andrew.cmu.edu", photo_url: "photos/44.png", role: "" },
+  { name: "Hamad Al Thani", email: "hkthani@andrew.cmu.edu", photo_url: "photos/45.png", role: "" },
+  { name: "Maha Al Suffar", email: "mhsuffar@andrew.cmu.edu", photo_url: "photos/46.png", role: "" },
+  { name: "Nasser Alansari", email: "nalansar@andrew.cmu.edu", photo_url: "photos/47.png", role: "" },
+  { name: "Jawaher Khaled Alsayed", email: "jalsayed@andrew.cmu.edu", photo_url: "photos/48.png", role: "" },
+  { name: "Gana Elnajjar", email: "goe@andrew.cmu.edu", photo_url: "photos/49.png", role: "" },
+  { name: "Mikaela Rae Florida", email: "mflorida@andrew.cmu.edu", photo_url: "photos/50.png", role: "" },
+  { name: "Maeda H S Al Haidar", email: "mhsalhai@andrew.cmu.edu", photo_url: "photos/51.png", role: "" },
+  { name: "Zhansaya Matkenova", email: "zmatkeno@andrew.cmu.edu", photo_url: "photos/52.png", role: "" },
+  { name: "Jemal Velihanova", email: "jvelihan@andrew.cmu.edu", photo_url: "photos/53.png", role: "" },
+  { name: "Ahmed Warraich", email: "awarraic@andrew.cmu.edu", photo_url: "photos/54.png", role: "" },
+  { name: "Jana Abdelmaguid", email: "jabdelma@andrew.cmu.edu", photo_url: "photos/55.png", role: "" },
+  { name: "Abrar Tasneem Abir", email: "aabir@andrew.cmu.edu", photo_url: "photos/56.png", role: "" },
+  { name: "Rainier Agcaoili", email: "ragcaoil@andrew.cmu.edu", photo_url: "photos/57.png", role: "" },
+  { name: "Abdulla Al Janahi", email: "aajanahi@andrew.cmu.edu", photo_url: "photos/58.png", role: "" },
+  { name: "Seckhen Andrade Cuellar", email: "saandrad@andrew.cmu.edu", photo_url: "photos/59.png", role: "" },
+  { name: "David Claudio", email: "dcnavarr@andrew.cmu.edu", photo_url: "photos/60.png", role: "" },
+  { name: "Enoch Luis Catuncan", email: "escatunc@andrew.cmu.edu", photo_url: "photos/61.png", role: "" },
+  { name: "Alikhan Chyngyz", email: "achyngyz@andrew.cmu.edu", photo_url: "photos/62.png", role: "" },
+  { name: "Nikolaz Devidze", email: "ndevidze@andrew.cmu.edu", photo_url: "photos/63.png", role: "" },
+  { name: "Mohamed Elsayed", email: "mtelsaye@andrew.cmu.edu", photo_url: "photos/64.png", role: "" },
+  { name: "Mohamed Elzeni", email: "msmohame@andrew.cmu.edu", photo_url: "photos/65.png", role: "" },
+  { name: "Jingxiang Gao", email: "jingxia3@andrew.cmu.edu", photo_url: "photos/66.png", role: "" },
+  { name: "Aditya Gupta", email: "adityag4@andrew.cmu.edu", photo_url: "photos/67.png", role: "" },
+  { name: "Zeina Halawa", email: "zrh@andrew.cmu.edu", photo_url: "photos/68.png", role: "" },
+  { name: "Hamzah Hamad", email: "hwhamad@andrew.cmu.edu", photo_url: "photos/69.png", role: "" },
+  { name: "Mohamed Hassaneen", email: "mohammee@andrew.cmu.edu", photo_url: "photos/70.png", role: "" },
+  { name: "Malak Ibrahim", email: "mmibrahi@andrew.cmu.edu", photo_url: "photos/71.png", role: "" },
+  { name: "Adan Jawad", email: "adanj@andrew.cmu.edu", photo_url: "photos/72.png", role: "" },
+  { name: "Maryam Khodadadi", email: "mnkhodad@andrew.cmu.edu", photo_url: "photos/73.png", role: "" },
+  { name: "Tram Tran", email: "tntran@andrew.cmu.edu", photo_url: "photos/74.png", role: "" },
+  { name: "Aboud Abdalla", email: "aabdalla@andrew.cmu.edu", photo_url: "photos/76.png", role: "" },
+  { name: "Steve Ndayambaje", email: "sndayamb@andrew.cmu.edu", photo_url: "photos/75.png", role: "" },
+  { name: "Mugur Andrei Preda", email: "mpreda@andrew.cmu.edu", photo_url: "photos/77.png", role: "" },
+  { name: "Gani Raissov", email: "graissov@andrew.cmu.edu", photo_url: "photos/78.png", role: "" },
+  { name: "Raman Saparkhan", email: "rsaparkh@andrew.cmu.edu", photo_url: "photos/79.png", role: "" },
+  { name: "Sunaya Upadhyay", email: "sunayau@andrew.cmu.edu", photo_url: "photos/80.png", role: "" },
+  { name: "Abdallah Almana", email: "aalmana@andrew.cmu.edu", photo_url: "photos/81.png", role: "" },
+  { name: "Haolin Wang", email: "haolinwa@andrew.cmu.edu", photo_url: "photos/82.png", role: "" },
+  { name: "Abdallah Abdaljalil", email: "aabdalja@andrew.cmu.edu", photo_url: "photos/83.png", role: "" },
+  { name: "Aya Abdelhamid", email: "ayaa@andrew.cmu.edu", photo_url: "photos/84.png", role: "" },
+  { name: "Anel Adalbek", email: "aadalbek@andrew.cmu.edu", photo_url: "photos/85.png", role: "" },
+  { name: "Rayyan Ahmed", email: "mrahmed@andrew.cmu.edu", photo_url: "photos/86.png", role: "" },
+  { name: "Aisha Al Attiyah", email: "aattiyah@andrew.cmu.edu", photo_url: "photos/87.png", role: "" },
+  { name: "Latifa Al Hitmi", email: "lhitmi@andrew.cmu.edu", photo_url: "photos/88.png", role: "" },
+  { name: "Al Anoud Al Khulaifi", email: "amkhulai@andrew.cmu.edu", photo_url: "photos/89.png", role: "" },
+  { name: "Haya Al Kubaisi", email: "hkkubais@andrew.cmu.edu", photo_url: "photos/90.png", role: "" },
+  { name: "Ruba Al Mahmoud", email: "rmmahmou@andrew.cmu.edu", photo_url: "photos/91.png", role: "" },
+  { name: "Abdulaziz Al Mannai", email: "abdulazm@andrew.cmu.edu", photo_url: "photos/92.png", role: "" },
+  { name: "Khalifa Al Thani", email: "khalifat@andrew.cmu.edu", photo_url: "photos/93.png", role: "" },
+  { name: "Moza Al Thani", email: "mthani2@andrew.cmu.edu", photo_url: "photos/94.png", role: "" },
+  { name: "Ghalya Al Eshaq", email: "geshaq@andrew.cmu.edu", photo_url: "photos/95.png", role: "" },
+  { name: "Fatima Al Haddad", email: "fhaddad@andrew.cmu.edu", photo_url: "photos/96.png", role: "" },
+  { name: "Deema Al Mohanadi", email: "dmohanad@andrew.cmu.edu", photo_url: "photos/97.png", role: "" },
+  { name: "Ahmad Al Obaidan", email: "akobaida@andrew.cmu.edu", photo_url: "photos/98.png", role: "" },
+  { name: "Maryam Alkhater", email: "malkhate@andrew.cmu.edu", photo_url: "photos/99.png", role: "" },
+  { name: "Nour Alseaf", email: "nalseaf@andrew.cmu.edu", photo_url: "photos/100.png", role: "" },
+  { name: "Safa Amin", email: "sramin@andrew.cmu.edu", photo_url: "photos/101.png", role: "" },
+  { name: "Ekaterina Demenkova", email: "edemenko@andrew.cmu.edu", photo_url: "photos/102.png", role: "" },
+  { name: "Hazem Elsayed", email: "hmelsaye@andrew.cmu.edu", photo_url: "photos/103.png", role: "" },
+  { name: "Retaj Samir Esmail Sharaf", email: "rsharaf@andrew.cmu.edu", photo_url: "photos/104.png", role: "" },
+  { name: "Fatou Gueye", email: "fgueye@andrew.cmu.edu", photo_url: "photos/105.png", role: "" },
+  { name: "Hiba Hamad", email: "hhamad@andrew.cmu.edu", photo_url: "photos/106.png", role: "" },
+  { name: "Sarra Khelifi", email: "skhelifi@andrew.cmu.edu", photo_url: "photos/107.png", role: "" },
+  { name: "Zahera Mahmud", email: "zmahmud@andrew.cmu.edu", photo_url: "photos/108.png", role: "" },
+  { name: "Noor Niknam", email: "nniknam@andrew.cmu.edu", photo_url: "photos/109.png", role: "" },
+  { name: "Reem Mohamed Saad Kensouh", email: "rkensouh@andrew.cmu.edu", photo_url: "photos/110.png", role: "" },
 ];
 
 // ── App init ──────────────────────────────────────────
@@ -1198,12 +1207,19 @@ function loadSeniorInbox(seniorData) {
     where('toEmail', '==', seniorData.email.toLowerCase()),
     orderBy('createdAt', 'desc')
   );
-  unsubInbox = onSnapshot(q, snap => {
-    allLetters = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    if ($('mailbox-overlay').style.display === 'block') {
-      buildInbox(allLetters, seniorData);
+  unsubInbox = onSnapshot(q,
+    snap => {
+      allLetters = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      if ($('mailbox-overlay').style.display === 'block') {
+        buildInbox(allLetters, seniorData);
+      }
+    },
+    err => {
+      // Permission denied before unlock time — expected, show countdown as normal
+      console.log('Inbox locked server-side:', err.code);
+      allLetters = [];
     }
-  });
+  );
 }
 
 const PHOTOS_PER_PAGE = 3; // how many photos side by side per slide
@@ -1232,6 +1248,7 @@ async function buildEnvelopes() {
     const wrap = document.createElement('div');
     wrap.className = 'envelope-wrap';
     wrap.dataset.name = senior.name.toLowerCase();
+    wrap.dataset.role = (senior.role || '').toLowerCase();
 
     const photoHTML = senior.photo_url
       ? `<img class="env-photo" src="${senior.photo_url}" alt="${senior.name}"
@@ -1256,7 +1273,7 @@ window.filterEnvelopes = function(query) {
   const wraps = document.querySelectorAll('.envelope-wrap');
   let visible = 0;
   wraps.forEach(w => {
-    const match = !q || w.dataset.name.includes(q);
+    const match = !q || w.dataset.name.includes(q) || w.dataset.role.includes(q);
     w.classList.toggle('hidden', !match);
     if (match) visible++;
   });
@@ -1273,27 +1290,60 @@ function updateSearchCount(visible, total) {
   $('search-count').textContent = visible < total ? `Showing ${visible} of ${total} seniors` : '';
 }
 
+// ── Lock helpers ──────────────────────────────────────
+function isUnlocked() {
+  return Date.now() >= RELEASE_TIME.getTime();
+}
+function timeUntilRelease() {
+  const diff = RELEASE_TIME.getTime() - Date.now();
+  if (diff <= 0) return null;
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  const parts = [];
+  if (d > 0) parts.push(`${d}d`);
+  if (h > 0) parts.push(`${h}h`);
+  if (m > 0) parts.push(`${m}m`);
+  parts.push(`${s}s`);
+  return parts.join(' ');
+}
+
 function buildInbox(letters, seniorData) {
   const list = $('mailbox-list');
   list.innerHTML = '';
-  if (letters.length === 0) {
+  const locked = !isUnlocked();
+
+  if (letters.length === 0 && !locked) {
     list.innerHTML = '<div style="padding:2rem;text-align:center;color:#999;font-style:italic;">No letters yet — they\'re on their way 💌</div>';
     return;
   }
-  letters.forEach((letter, i) => {
-    const date = letter.createdAt?.toDate
+
+  // While locked, show placeholder rows even if letters haven't loaded yet
+  const count = letters.length || 3;
+  for (let i = 0; i < count; i++) {
+    const letter = letters[i];
+    const date = (!locked && letter?.createdAt?.toDate)
       ? letter.createdAt.toDate().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
       : '';
     const item = document.createElement('div');
     item.className = 'mailbox-item';
     item.id = 'mitem-' + i;
-    item.innerHTML = `
-      <div class="mailbox-item-from">${letter.fromName}</div>
-      <div class="mailbox-item-date">${date}</div>
-    `;
-    item.onclick = () => openLetter(letter, i);
+    if (locked) {
+      item.innerHTML = `
+        <div class="mailbox-item-from" style="filter:blur(4px);user-select:none;pointer-events:none;">••••••••••</div>
+        <div class="mailbox-item-date">locked</div>`;
+      item.onclick = () => showToast('Letters unlock on ' + RELEASE_TIME.toLocaleString('en-US', {
+        month: 'long', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
+      }));
+    } else {
+      item.innerHTML = `
+        <div class="mailbox-item-from">${letter.fromName}</div>
+        <div class="mailbox-item-date">${date}</div>`;
+      item.onclick = () => openLetter(letter, i);
+    }
     list.appendChild(item);
-  });
+  }
 }
 
 function openLetter(letter, idx) {
@@ -1333,7 +1383,6 @@ function openLetter(letter, idx) {
     </div>
   `;
 
-  // Mobile: show reader panel full-screen, hide list
   if (window.innerWidth <= 600) {
     $('mailbox-reader-wrap').classList.add('open');
     $('mailbox-back-btn').style.display = 'inline-flex';
@@ -1346,23 +1395,67 @@ window.mailboxShowList = function() {
   document.querySelectorAll('.mailbox-item').forEach(el => el.classList.remove('active'));
 };
 
+let countdownInterval = null;
+
 window.openMailbox = function(seniorData) {
   $('mailbox-overlay').style.display = 'block';
   $('mailbox-greeting').textContent = `${seniorData.name}'s inbox`;
-  // Always reset to list view when opening
   $('mailbox-reader-wrap').classList.remove('open');
   $('mailbox-back-btn').style.display = 'none';
   buildInbox(allLetters, seniorData);
-  // Desktop: auto-open first letter
-  if (allLetters.length > 0 && window.innerWidth > 600) openLetter(allLetters[0], 0);
+
+  if (!isUnlocked()) {
+    // Show countdown in the reader panel
+    function renderCountdown() {
+      const remaining = timeUntilRelease();
+      const releaseStr = RELEASE_TIME.toLocaleString('en-US', {
+        weekday: 'long', month: 'long', day: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      });
+      $('mailbox-reader').innerHTML = `
+        <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:2rem;min-height:300px;">
+          <div style="text-align:center;max-width:360px;">
+            <div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#1a1a2e;margin-bottom:0.5rem;">Letters locked</div>
+            <p style="color:#666;font-size:0.9rem;margin-bottom:1.5rem;line-height:1.6;">
+              Your letters will unlock on<br/>
+              <strong style="color:#1a1a2e;">${releaseStr}</strong>
+            </p>
+            <div style="background:#1a1a2e;color:white;font-size:1.6rem;font-family:'Lora',serif;padding:1rem 2rem;border-radius:12px;letter-spacing:2px;" id="mailbox-countdown">${remaining}</div>
+          </div>
+        </div>
+      `;
+    }
+    renderCountdown();
+
+    if (countdownInterval) clearInterval(countdownInterval);
+    countdownInterval = setInterval(() => {
+      const cd = $('mailbox-countdown');
+      if (!cd) { clearInterval(countdownInterval); countdownInterval = null; return; }
+      const remaining = timeUntilRelease();
+      if (!remaining) {
+        // Unlocked — reload so Firestore listener gets fresh permissions
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+        location.reload();
+      } else {
+        cd.textContent = remaining;
+      }
+    }, 1000);
+
+  } else {
+    if (allLetters.length > 0 && window.innerWidth > 600) openLetter(allLetters[0], 0);
+  }
 };
+
 window.closeMailbox = function() {
   $('mailbox-overlay').style.display = 'none';
+  if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
 };
 
 
 window.exportLetters = async function() {
   if (!allLetters.length) { showToast('No letters to export yet.'); return; }
+  if (!isUnlocked()) { showToast('Letters are still locked — export available after release.'); return; }
 
   const btn = $('export-btn');
   btn.textContent = '⏳ Preparing…';
@@ -1715,3 +1808,4 @@ window.closeModal = id => $(id).classList.remove('open');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </body>
 </html>
+
