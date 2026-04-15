@@ -1247,7 +1247,7 @@ async function buildEnvelopes() {
     wrap.dataset.name = senior.name.toLowerCase();
 
     const photoHTML = senior.photo_url
-      ? `<img class="env-photo" src="${senior.photo_url}" alt="${senior.name}"
+      ? `<img class="env-photo" src="${senior.photo_url}" alt="${senior.name}" loading ="lazy"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
          <div class="env-photo-placeholder" style="display:none">${EMOJI_PLACEHOLDERS[idx % EMOJI_PLACEHOLDERS.length]}</div>`
       : `<div class="env-photo-placeholder">${EMOJI_PLACEHOLDERS[idx % EMOJI_PLACEHOLDERS.length]}</div>`;
