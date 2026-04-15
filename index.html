@@ -1687,12 +1687,10 @@ window.removeMedia = function(idx) {
   attachedMedia[idx] = null;
 };
 
-// ── Encryption helpers (Web Crypto API — no library needed) ───
 // Letters are encrypted in the browser before saving to Firestore.
 // The key is derived from the recipient's email — never stored anywhere.
-// Even the project owner cannot read letters from the database directly.
 
-const CRYPTO_SALT = 'senior-letters-2026'; // change this to something unique to your project
+const CRYPTO_SALT = 'senior-letters-2026'; 
 
 async function deriveKey(email) {
   const enc = new TextEncoder();
